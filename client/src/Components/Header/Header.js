@@ -19,7 +19,7 @@ const Header = () => {
                 style={{textDecoration: 'none', color: '#FEFEFE'}}
                 to='/'
             >
-                CFF
+                Freeple
             </Link>
             </Typography>
             <Link
@@ -27,7 +27,7 @@ const Header = () => {
                 to='/login'
             >
                 <Button className={button}>
-                    button
+                    Log In
                 </Button>
             </Link>
         </AppBar>

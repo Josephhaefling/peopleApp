@@ -6,7 +6,7 @@ const Description = () => {
 
     const [viewMore, setViewMore] = useState(false)
     const styles = useStyles()
-    const {description, fullDescription, header} = styles
+    const {description, fullDescription, header, button} = styles
 
     const handleClick = () => setViewMore(!viewMore)
 
@@ -21,7 +21,7 @@ const Description = () => {
                     Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet.Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet.Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet.Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet.Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet.Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet. Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet.Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet.Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet. 
                 </p>
             </div>
-            <Button onClick={handleClick}>{!viewMore ? 'Read more' : 'Read less'}</Button>
+            <Button className={button} onClick={handleClick}>{!viewMore ? 'Read more' : 'Read less'}</Button>
         </div>
     )
 }

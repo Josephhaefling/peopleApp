@@ -1,7 +1,8 @@
 import { makeStyles } from '@material-ui/core';
 
 export default makeStyles(() => ({
-    event: {
+    eventContainer: {
+        fontFamily: 'Open Sans',
         borderRadius: 3,
         boxShadow: '0px 0px 3px 2px rgba(45, 46, 46, .3)',
         height: '25vh',
@@ -14,7 +15,13 @@ export default makeStyles(() => ({
         }    
     },
     header: {
-        color: '#3F84E5'
+        color: '#3F84E5',
+        fontFamily: 'Libre Franklin'
+    },
+    button: {
+        fontFamily: 'Open Sans',
+        textTransform: 'capitalize',
+        height: '30px'
     },
     attendeesContainer: {
         display: 'flex',

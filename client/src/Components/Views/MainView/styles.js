@@ -6,7 +6,7 @@ export default makeStyles(() => ({
         display: 'flex',
         height: 'auto',
         justifyContent: 'space-around',
-        marginTop: '2vh'
+        marginTop: '2vh',
     }, 
     column1: {
         display: 'flex',

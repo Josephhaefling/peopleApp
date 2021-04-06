@@ -7,9 +7,8 @@ import Discussion from '../../Discussion/Discussion';
 import { getAllUsers } from '../../../api';
 import useStyles from './styles';
 
-const MainView = (props) => {
+const AdminView = () => {
 
-    const { currentUser, setEvents, events } = props
     const styles = useStyles()
     const { mainPage, column1, column2} = styles
 
@@ -23,11 +22,11 @@ const MainView = (props) => {
             </div>
             <div className={column2}>
                 <div>
-                    <UpComingEvents setEvents={setEvents} events={events} />
+                    <UpComingEvents />
                 </div>
             </div>
         </div>
     )
 }
 
-export default MainView
+export default AdminView

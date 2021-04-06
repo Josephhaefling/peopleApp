@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import MainView from './Components/Views/MainView/MainView';
 import Header from './Components/Header/Header';
 import EventView from './Components/Views/EventView/EventView';
@@ -5,6 +6,10 @@ import LoginView from './Components/Views/LoginView/LoginView';
 import { Switch, Route } from 'react-router-dom';
 
 function App() {
+
+  const [ currentUser, setCurrentUser ] = useState('')
+  const [ events, setEvents ] = useState('')
+
   return (
     <Switch>
       <Route
@@ -13,7 +18,7 @@ function App() {
           return (
             <div>
               <Header />
-              <LoginView />
+              <LoginView setCurrentUser={ setCurrentUser }/>
             </div>
           )
         }}
@@ -48,7 +53,7 @@ function App() {
           return (
             <div className="App">
               <Header />
-              <MainView />
+              <MainView currentUser={currentUser} setEvents={setEvents} events={events} />
             </div>
           )
         }}

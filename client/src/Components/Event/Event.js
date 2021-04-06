@@ -1,32 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import useStyles from './styles'
 
-const Event = () => {
+const Event = (props) => {
 
-    const [ attending, setAttending ] = useState(1)
+    const { title, attending, description, date, time } = props.eventInfo
     const styles = useStyles()
-    const {attendeesContainer, event, header} = styles
+    const {attendeesContainer, eventContainer, header, button} = styles
 
     const handleClick = () => {
-        setAttending(attending + 1)
+        // setPeopleAttending(attending + 1)
     }
 
+    useEffect(() => {
+        // attending && setPeopleAttending(attending)
+    },[])
+
     return (
-        <div className={ event }>
+        <div className={ eventContainer }>
             <Link
                 style={{textDecoration: 'none', color: '#25291C'}}
                 to='/event'
             >
-                <h4 className={ header } >Wed, Apr 1, 5:30 PM MST</h4>
-                <h3>Event Title</h3>
-                <p>Events description</p>
-                <div className={ attendeesContainer }>
-                    <h4>Attendees: { attending }</h4>
-                    <Button onClick={ handleClick }>Attend</Button>
-                </div>
+                <h4 className={ header } >{`${date} ${time}`}</h4>
+                <h3>{title}</h3>
+                <p>{description}</p>
             </Link>
+                <div className={ attendeesContainer }>
+                    <h4>Attendees: { attending.length }</h4>
+                    <Button className={button} onClick={ handleClick } variant='contained'>Attend</Button>
+                </div>
         </div>
     )
 }

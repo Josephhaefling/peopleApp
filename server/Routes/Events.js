@@ -1,7 +1,10 @@
 import express from 'express';
-import {getEvents} from '../Controllers/Events.js';
+
+import {createEvent, getEvents} from '../Controllers/Events.js';
 
 const router = express.Router()
-router.get('/events', getUsers)
+
+router.get('/', getEvents)
+router.post('/', createEvent)
 
 export default router 

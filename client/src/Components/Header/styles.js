@@ -18,10 +18,13 @@ export default makeStyles(() => ({
     header: {
         color: '#FEFEFE',
         fontSize: 60,
-        width: '60vw'
+        width: '60vw',
+        fontFamily: 'Libre Franklin',
     }, 
     button: {
         color: '#FEFEFE',
-        width: '10vw'
+        width: '10vw',
+        fontFamily: 'Libre Franklin',
+        textTransform: 'capitalize'
     }
 }))
