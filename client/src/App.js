@@ -1,24 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MainView from './Components/Views/MainView/MainView';
+import AdminView from './Components/Views/AdminView/AdminView';
 import Header from './Components/Header/Header';
 import EventView from './Components/Views/EventView/EventView';
 import LoginView from './Components/Views/LoginView/LoginView';
+import EditDescription from './Components/EditDescription/EditDescription';
+import EditEvent from './Components/EditEvent/EditEvent';
 import { Switch, Route } from 'react-router-dom';
 
 function App() {
 
   const [ currentUser, setCurrentUser ] = useState('')
   const [ events, setEvents ] = useState('')
+  const [description, setDescription] = useState('')
+  console.log('description app:', description)
 
   return (
     <Switch>
+      <Route
+        path='/edit_event'
+        render={()=> {
+          return (
+            <div>
+              <Header />
+              <EditEvent />            
+            </div>
+          )
+        }}
+      ></Route>
+      <Route
+        path='/edit_description'
+        render={()=> {
+          return (
+            <div>
+              <Header />
+              <EditDescription 
+                description={description} 
+                setDescription={setDescription} 
+              />            
+            </div>
+          )
+        }}
+      ></Route>
       <Route
         path='/login'
         render={()=> {
           return (
             <div>
               <Header />
-              <LoginView setCurrentUser={ setCurrentUser }/>
+              <LoginView currentUser={ currentUser } setCurrentUser={ setCurrentUser }/>
             </div>
           )
         }}
@@ -53,7 +83,21 @@ function App() {
           return (
             <div className="App">
               <Header />
-              <MainView currentUser={currentUser} setEvents={setEvents} events={events} />
+              {
+              currentUser.admin ? 
+                <AdminView 
+                  currentUser={currentUser} 
+                  description={description} 
+                  setDescription={setDescription}
+                  events={events} s
+                  setEvents={setEvents} /> : 
+                <MainView 
+                  currentUser={currentUser} 
+                  description={description}
+                  setDescription={setDescription} 
+                  events={events} 
+                  setEvents={setEvents} />
+                }
             </div>
           )
         }}

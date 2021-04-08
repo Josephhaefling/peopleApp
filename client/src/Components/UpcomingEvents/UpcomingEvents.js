@@ -13,10 +13,10 @@ const useStyles = makeStyles({
 
 const UpcomingEvents = (props) => {
 
-    const { setEvents, events } = props
+    const { setEvents, events, currentUser } = props
+    const { admin, userName } = currentUser ? currentUser : {admin: '', userName: ''}
     const classes = useStyles();
-    const eventsList = events && createEvents(events)
-
+    const eventsList = events && createEvents(events, admin, userName)
     const setAllEvents = async () => {
         const events = await getAllEvents()
         setEvents(events.data)

@@ -5,12 +5,14 @@ import cors from 'cors';
 
 import userRoutes from './Routes/Users.js';
 import eventRoutes from './Routes/Events.js';
+import descriptionRoutes from './Routes/Description.js';
 
 const app = express()
 
 app.use(bodyParser.json({limit: '30mb', extended: true}))
 app.use(bodyParser.urlencoded({limit: '30mb', extended: 'true'}))
 app.use(cors())
+app.use('/descriptions', descriptionRoutes)
 app.use('/users', userRoutes)
 app.use('/events', eventRoutes)
 

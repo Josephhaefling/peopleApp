@@ -21,13 +21,23 @@ const useStyles = makeStyles({
     button: {
         marginTop: '5px',
         marginBottom: '5px'
-    }
+    },
+    font: {
+        fontFamily: 'Open Sans',
+    },
+    text: {
+        textTransform: 'capitalize',
+        '&:hover': {
+        backgroundColor: 'transparent',
+        color: '#5D98E9'
+        },
+    },
 });
 
 
 const SignUp = (props) => {
 
-    const { logIn, setLogIn } = props
+    const { isLoggedIn, setIsLoggedIn } = props
     const classes = useStyles();
     const [ userName, setUserName ] = useState('')
     const [ choosePassword, setChoosePassword ] = useState('')
@@ -60,7 +70,7 @@ const SignUp = (props) => {
 
     useEffect(() => {
          if (userName && choosePassword && confirmPassword && firstName) {
-            setIsComplete(false);
+            setIsComplete(true);
         } 
     },[choosePassword, confirmPassword, firstName, userName])
 
@@ -68,6 +78,11 @@ const SignUp = (props) => {
         <FormControl classes={{ root: classes.signUpBox }} component='div'>
                 <Typography classes={{ root: classes.boxTitle }}>Sign Up</Typography>
                 <TextField 
+                InputLabelProps={{
+                    style: {
+                    fontFamily: 'Open Sans',
+                    },
+                }}
                     required
                     id='standard-required'
                     label='Choose User Name'
@@ -75,6 +90,11 @@ const SignUp = (props) => {
                     onChange={(e) => setUserName(e.target.value)}
                 />
                 <TextField 
+                 InputLabelProps={{
+                    style: {
+                    fontFamily: 'Open Sans',
+                    },
+                }}
                     required
                     id='standard-required'
                     label='Choose Password'
@@ -83,6 +103,11 @@ const SignUp = (props) => {
                     onChange={(e) => setChoosePassword(e.target.value)}
                 />
                 <TextField 
+                 InputLabelProps={{
+                    style: {
+                    fontFamily: 'Open Sans',
+                    },
+                }}
                     required
                     id='standard-required'
                     label='Confirm Password'
@@ -91,6 +116,11 @@ const SignUp = (props) => {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                 />
                 <TextField 
+                 InputLabelProps={{
+                    style: {
+                    fontFamily: 'Open Sans',
+                    },
+                }}
                     required
                     id='standard-required'
                     label='First Name'
@@ -99,6 +129,11 @@ const SignUp = (props) => {
                     onChange={(e) => setFirstName(e.target.value)}
                 />
                 <TextField 
+                 InputLabelProps={{
+                    style: {
+                    fontFamily: 'Open Sans',
+                    },
+                }}
                     id='standard-required'
                     label='Last Name'
                     defaultValue='ex: cff123!'
@@ -106,13 +141,19 @@ const SignUp = (props) => {
                     onChange={(e) => setLastName(e.target.value)}
                 />
                 <TextField 
+                 InputLabelProps={{
+                    style: {
+                    fontFamily: 'Open Sans',
+                    },
+                }}
                     id='standard-required'
                     label='Email'
                     defaultValue='ex: joe@protonmail.com'
                     value={ email }
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <Button classes={{ root: classes.button }} onClick={(e) => handleClick(e)} variant='contained' disabled={isComplete}> 
+                <Button classes={{ root: `${classes.text} ${classes.font}` }} onClick={() => setIsLoggedIn(!isLoggedIn)}>Back</Button>
+                <Button href='/' classes={{ root: `${classes.font} ${classes.button}` }} onClick={(e) => handleClick(e)} variant='contained' disabled={!isComplete}> 
                     Sign Up
                 </Button>
             </FormControl>

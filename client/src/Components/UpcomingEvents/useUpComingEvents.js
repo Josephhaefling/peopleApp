@@ -6,7 +6,8 @@ export const getEvents = async () => {
     return events   
 }
 
-export const createEvents = (events) => {
-    const upComingEvents = events.map(event => <Event eventInfo={ event } />)
+export const createEvents = (events, isAdmin, userName) => {
+    console.log(userName)
+    const upComingEvents = events.map(event => <Event eventInfo={ event } isAdmin={isAdmin} userName={userName} />)
     return upComingEvents
 }

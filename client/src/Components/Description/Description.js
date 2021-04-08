@@ -1,27 +1,44 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import useStyles from './styles';
-import { Button, Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
+import { getDescription } from'./useDescription';
  
-const Description = () => {
-
+const Description = (props) => {
+    const { admin, description, setDescription } = props
     const [viewMore, setViewMore] = useState(false)
     const styles = useStyles()
-    const {description, fullDescription, header, button} = styles
+    const {descriptionContainer, fullDescription, header, button} = styles
 
     const handleClick = () => setViewMore(!viewMore)
 
+    const createDescription = async () => {
+        const currentDescription = await getDescription()
+        setDescription(currentDescription)
+    }
+
+    useEffect(() => {
+        createDescription()
+    },[])
+
     return (
         <div>
-            <div className={ viewMore ? fullDescription : description }>
+            <div className={ viewMore ? fullDescription : descriptionContainer }>
                 <h3 className={header}>
                     What we are about
                 </h3>
                 <p> 
-                    Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet.Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet.Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet.Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet.Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet.Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet. Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet.Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet.Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet. 
-                    Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet.Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet.Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet.Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet.Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet.Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet. Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet.Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet.Colorado Freedom Family is dope AF and you can kick us off of Meetup but we are still on the internet. 
+                    {description}
                 </p>
             </div>
-            <Button className={button} onClick={handleClick}>{!viewMore ? 'Read more' : 'Read less'}</Button>
+            <Button className={button} onClick={handleClick}>
+                {!viewMore ? 'Read more' : 'Read less'}
+            </Button>
+            <Link to='/edit_description' style={{textDecoration: 'none'}}>
+                <Button className={button}>
+                    Edit
+                </Button>
+            </Link>
         </div>
     )
 }

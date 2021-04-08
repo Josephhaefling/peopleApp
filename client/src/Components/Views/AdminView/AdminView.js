@@ -7,22 +7,32 @@ import Discussion from '../../Discussion/Discussion';
 import { getAllUsers } from '../../../api';
 import useStyles from './styles';
 
-const AdminView = () => {
+const AdminView = (props) => {
 
+    const { currentUser, setEvents, events, description, setDescription } = props
     const styles = useStyles()
-    const { mainPage, column1, column2} = styles
+    const { adminPage, column1, column2} = styles
 
     return (
-        <div className={mainPage}>
+        <div className={adminPage}>
             <div className={column1}>
-                <Description />
+                <h1>I am the admin view</h1>
+                <Description 
+                    admin={currentUser.admin} 
+                    description={description} 
+                    setDescription={setDescription} 
+                />
                 <Members />
                 <Photos />
                 <Discussion />  
             </div>
             <div className={column2}>
                 <div>
-                    <UpComingEvents />
+                    <UpComingEvents 
+                        currentUser={ currentUser } 
+                        setEvents={ setEvents } 
+                        events={ events} 
+                    />
                 </div>
             </div>
         </div>
