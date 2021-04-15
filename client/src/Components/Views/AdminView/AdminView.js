@@ -9,16 +9,24 @@ import useStyles from './styles';
 
 const AdminView = (props) => {
 
-    const { currentUser, setEvents, events, description, setDescription } = props
+    const { 
+        currentUser, 
+        setEvents, 
+        events, 
+        description, 
+        setDescription, 
+        currentEvent, 
+        setCurrentEvent 
+    } = props
+
     const styles = useStyles()
     const { adminPage, column1, column2} = styles
 
     return (
         <div className={adminPage}>
             <div className={column1}>
-                <h1>I am the admin view</h1>
                 <Description 
-                    admin={currentUser.admin} 
+                    admin={currentUser.isAdmin} 
                     description={description} 
                     setDescription={setDescription} 
                 />
@@ -29,6 +37,8 @@ const AdminView = (props) => {
             <div className={column2}>
                 <div>
                     <UpComingEvents 
+                        currentEvent={currentEvent}
+                        setCurrentEvent={setCurrentEvent}
                         currentUser={ currentUser } 
                         setEvents={ setEvents } 
                         events={ events} 

@@ -6,14 +6,13 @@ import SignUp from '../../SignUp/SignUp';
 
 const LoginView = (props) => {
 
-    const { currentUser, setCurrentUser } = props
-    const [ isLoggedIn, setIsLoggedIn ] = useState(true)
+    const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = props
     const styles = useStyles()
     const { loginPage } = styles
 
     return (
         <div className={loginPage}>
-            {isLoggedIn ? ( <LogIn user={currentUser} setCurrentUser={setCurrentUser} logIn={isLoggedIn} setLogIn={setIsLoggedIn} />) : ( <SignUp isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> )}
+            {!isLoggedIn ? ( <LogIn user={currentUser} setCurrentUser={setCurrentUser} logIn={isLoggedIn} setIsLoggedIn={ setIsLoggedIn } />) : ( <SignUp isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> )}
         </div>
     )
 }

@@ -24,11 +24,18 @@ export const createEvent = async (req, res) => {
 
 export const updateEvent = async (req, res) => {
     const { id } = req.params
-    const { description, time, attending} = res.body
-    const event = await eventMessage.findById(id)
+    const { title, description, time, date, attending} = req.body
+    await eventMessage.findById(id)
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No event with id: ${id}`)
-    const updatedEvent = { _id: id, time, description, attending}
-    await eventsMessage.findByIdAndUpdate(id, { description: description, time: time, attending: attending})
+    const updatedEvent = { _id: id, title, time, description, attending}
+    await eventsMessage.findByIdAndUpdate(id, { title, description, time, attending})
     res.json(updatedEvent)
+}
+
+export const deleteEvent = async (req, res) => {
+    const { id } = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No event with id: ${id}`);
+    await eventMessage.findByIdAndRemove(id);
+    res.json({ message: "Event deleted successfully." });
 }
  

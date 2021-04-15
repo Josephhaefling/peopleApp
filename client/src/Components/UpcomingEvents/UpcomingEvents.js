@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
-import { Typography } from '@material-ui/core';
-import Event from '../Event/Event';
+import React, { useEffect, useCallback } from 'react';
+import { Typography, Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
 import { getEvents, createEvents } from './useUpComingEvents';
-import { getAllEvents } from '../../api';
 
 const useStyles = makeStyles({
     title: {
@@ -13,22 +12,38 @@ const useStyles = makeStyles({
 
 const UpcomingEvents = (props) => {
 
-    const { setEvents, events, currentUser } = props
-    const { admin, userName } = currentUser ? currentUser : {admin: '', userName: ''}
+    const { 
+            setEvents, 
+            events, 
+            currentUser, 
+            currentEvent, 
+            setCurrentEvent, 
+            setCurrentUser
+          } = props
+          
     const classes = useStyles();
-    const eventsList = events && createEvents(events, admin, userName)
-    const setAllEvents = async () => {
-        const events = await getAllEvents()
-        setEvents(events.data)
-    }
+    const eventsList = events && createEvents(events, setCurrentEvent, currentEvent, currentUser, setCurrentUser, setEvents)
+
+    const setAllEvents = useCallback(async () => {
+        const events = await getEvents()
+        setEvents(events)
+    }, [setEvents])
 
     useEffect(() => {
         setAllEvents()
-    }, [])
+    }, [setAllEvents])
 
     return (    
         <div className={classes.eventsContainer}>
             <Typography classes={{ root: classes.title }}>Upcoming Events</Typography>
+            {
+                currentUser.isAdmin && 
+                <Link to='/create_event' style={{textDecoration: 'none'}}>
+                    <Button>
+                        Create Event
+                    </Button>
+                </Link>
+            }
             <div>
                 {eventsList}
             </div>

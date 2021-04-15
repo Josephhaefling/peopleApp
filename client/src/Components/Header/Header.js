@@ -3,10 +3,36 @@ import { Link } from 'react-router-dom';
 import { AppBar, Typography, Button } from '@material-ui/core';
 import useStyles from './styles';
 
-const Header = () => {
+const Header = (props) => {
 
+    const { isLoggedIn } = props
     const styles = useStyles()
     const { header, button, navBar } = styles
+
+    const getButtonType = () => {
+       return isLoggedIn ?
+        (
+            <Link
+                style={{textDecoration: 'none', color: '#25291C'}}
+                to='/login'
+            >
+                <Button className={button}>
+                    Profile
+                </Button>   
+            </Link>
+        ) :
+        (
+            <Link
+                style={{textDecoration: 'none', color: '#25291C'}}
+                to='/login'
+            >
+                <Button className={button}>
+                    Log In
+                </Button>   
+            </Link>
+        )
+
+    }
 
     return (
         <AppBar
@@ -19,17 +45,10 @@ const Header = () => {
                 style={{textDecoration: 'none', color: '#FEFEFE'}}
                 to='/'
             >
-                Freeple
+                People
             </Link>
             </Typography>
-            <Link
-                style={{textDecoration: 'none', color: '#25291C'}}
-                to='/login'
-            >
-                <Button className={button}>
-                    Log In
-                </Button>
-            </Link>
+            { getButtonType() }
         </AppBar>
     )
 }

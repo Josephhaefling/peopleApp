@@ -43,17 +43,16 @@ const LogIn = (props) => {
     const [ password, setPassword ] = useState()
     const [ isUser, setIsUser ] = useState(false)
     const [ isComplete, setIsComplete ] = useState()
-    const { logIn, setLogIn, setCurrentUser } = props
+    const { logIn, setLogIn, setCurrentUser, setIsLoggedIn } = props
     const classes = useStyles();
-    // const [isComplete, setIsComplete] = useState();
 
-    const handleClick = useCallback(() => setLogIn(!logIn),[])
+    const handleClick = useCallback(() => setLogIn(!logIn),[logIn, setLogIn])
 
     const onSubmit = async (e, name, passcode) => {
-        e.preventDefault()
         const currentUser = await getCurrentUser(name, passcode)
         setIsUser(!isUser)
         setCurrentUser(currentUser)
+        setIsLoggedIn(true)
     }
 
       useEffect(() => {
@@ -93,12 +92,23 @@ const LogIn = (props) => {
                     placeholder='ex: cff123!'
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                <Link 
+                    to={isUser ? '/' : '/login'} 
+                    onClick={(e) => onSubmit(e, userName, password)}
+                    style={ {textDecoration: 'none', border: '1px solid red'} }
+                >
+                    <Button 
+                        disabled={!isComplete} 
+                        variant='contained' 
+                        classes={{ root: `${classes.button} ${classes.font}` }}
+                    > 
+                        Log In
+                    </Button>
+                </Link>
                 <Button 
-                href={isUser ? '/' : '/login'} 
-                disabled={!isComplete} onClick={(e) => onSubmit(e, userName, password)} variant='contained' classes={{ root: `${classes.button} ${classes.font}` }}> 
-                    Log In
-                </Button>
-                <Button onClick={handleClick} classes={{ root: `${classes.text} ${classes.font}` }}> 
+                    onClick={handleClick} 
+                    classes={{ root: `${classes.text} ${classes.font}` }}
+                > 
                     Sign up
                 </Button>
             </FormControl>     

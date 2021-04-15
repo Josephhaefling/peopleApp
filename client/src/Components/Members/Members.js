@@ -12,7 +12,7 @@ const Members = (props) => {
 
     const getUsers = async () => {
         const allUsers = await getAllUsers()
-        setUsers(allUsers)
+        setUsers(allUsers.data)
     }
 
     useEffect(() => {

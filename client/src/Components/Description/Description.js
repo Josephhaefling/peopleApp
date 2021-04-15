@@ -1,25 +1,25 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import useStyles from './styles';
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import { getDescription } from'./useDescription';
  
 const Description = (props) => {
-    const { admin, description, setDescription } = props
+    const { description, setDescription } = props
     const [viewMore, setViewMore] = useState(false)
     const styles = useStyles()
     const {descriptionContainer, fullDescription, header, button} = styles
 
     const handleClick = () => setViewMore(!viewMore)
 
-    const createDescription = async () => {
+    const createDescription = useCallback(async () => {
         const currentDescription = await getDescription()
         setDescription(currentDescription)
-    }
+    }, [ setDescription ])
 
     useEffect(() => {
         createDescription()
-    },[])
+    },[ createDescription ])
 
     return (
         <div>

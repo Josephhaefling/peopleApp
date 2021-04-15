@@ -1,10 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 
-const EventView = () => {
-
+const EventView = (props) => {
     return (
         <div>
-            <h1>I am going to be the event view</h1>
+            <Link to='/'>
+                <h3>hi</h3>
+                <Button>
+                Back
+                </Button>
+            </Link>
         </div>
     )
 }

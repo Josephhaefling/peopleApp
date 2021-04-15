@@ -3,6 +3,8 @@ import { Button, formatMs, TextField, Typography, FormControl } from '@material-
 import { createNewUser } from '../../api';
 import { isMatchingPassword } from './useSignUp';
 import { makeStyles } from '@material-ui/core';
+import FileBase from 'react-file-base64';
+
 
 const useStyles = makeStyles({
    signUpBox: {
@@ -45,12 +47,12 @@ const SignUp = (props) => {
     const [ firstName, setFirstName ] = useState('')
     const [ lastName, setLastName ] = useState('')
     const [ email, setEmail ] = useState('')
-    const [isComplete, setIsComplete] = useState();
+    const [isComplete, setIsComplete] = useState()
+    const [ image, setImage ] = useState()
 
     const onChange = (e) => {
         //There is a probably a dynaimc way to handle text input changes
     }
-
         const clearForm = useCallback(() => {
         setChoosePassword('')
         setConfirmPassword('')
@@ -62,11 +64,11 @@ const SignUp = (props) => {
 
     const handleClick = useCallback((e) => {
         // I am gonna sign a user up
-        const newUser = { userName, password: choosePassword, firstName, lastName, email }
+        const newUser = { userName, password: choosePassword, firstName, lastName, email, isAdmin: false, image }
         isMatchingPassword(choosePassword, confirmPassword)
         createNewUser(newUser)
         clearForm()
-    },[choosePassword, clearForm, confirmPassword, email, firstName, lastName, userName])
+    },[choosePassword, clearForm, confirmPassword, email, firstName, lastName, userName, image])
 
     useEffect(() => {
          if (userName && choosePassword && confirmPassword && firstName) {
@@ -115,6 +117,14 @@ const SignUp = (props) => {
                     value={ confirmPassword }
                     onChange={(e) => setConfirmPassword(e.target.value)}
                 />
+                <div>
+                   <FileBase 
+                    type="file" 
+                    multiple={false} 
+                    onDone={({ base64 }) => 
+                    setImage(base64 )} 
+                    />
+                </div>
                 <TextField 
                  InputLabelProps={{
                     style: {
