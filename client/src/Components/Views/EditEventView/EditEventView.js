@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { TextField, Button, Select, MenuItem, FormControl } from '@material-ui/core';
+import { TextField, Button, Select, MenuItem, FormControl, FormHelperText } from '@material-ui/core';
 import { findCurrentEvent, removeCurrentEvent } from './useEditEvent';
 import useStyles from './styles';
 import { editEvent, createEvent, deleteEvent } from '../../../api';
@@ -12,10 +12,13 @@ const EditEventView = (props) => {
     const [ eventDescription, setEventDescription] = useState()
     const [ eventTime, setEventTime ] = useState()
     const [ eventDate, setEventDate ] = useState()
-    const { setCurrentEvent, currentEvent, events, setEvents }= props
+    const [ hour, setHour ] = useState('choose hour')
+    const [ minute, setMinute ] = useState('choose minute')
+    const [ timeOfDay, setTimeOfDay ] = useState('choose AM/PM')
+    const { setCurrentEvent, currentEvent, events, setEvents, currentUser }= props
     const { date, description, time, title, _id, attending } = currentEvent
     const styles = useStyles()
-    const { eventContainer, titleInput, descriptionInput } = styles
+    const { eventContainer, titleInput, descriptionInput, timeContainer } = styles
 
 
     const handleClick = useCallback(async (e) => {
@@ -32,8 +35,9 @@ const EditEventView = (props) => {
             console.log(eventToDelete)
             deleteEvent(eventToDelete._id)
             setEvents(modifiedEvents)
+            setCurrentEvent('')
         } else {
-            updatedEvent.attending = [ _id]
+            updatedEvent.attending = [ currentUser._id]
             createEvent(updatedEvent)
             setEvents([...events, updatedEvent])
         }
@@ -43,22 +47,36 @@ console.log(moment().format('MM/DD/YYYY'))
 
 return (
         <div className={ eventContainer }>
-              <FormControl>
-              <Select value={moment().format('MM/DD/YYYY')}>
-                  <MenuItem value={moment().format('MM/DD/YYYY')}>1</MenuItem>
-                  <MenuItem value={moment().format('MM/DD/YYYY')}>2</MenuItem>
-                  <MenuItem value={moment().format('MM/DD/YYYY')}>3</MenuItem>
-                  <MenuItem value={moment().format('MM/DD/YYYY')}>4</MenuItem>
-                  <MenuItem value={moment().format('MM/DD/YYYY')}>5</MenuItem>
-                  <MenuItem value={moment().format('MM/DD/YYYY')}>6</MenuItem>
-                  <MenuItem value={moment().format('MM/DD/YYYY')}>7</MenuItem>
-                  <MenuItem value={moment().format('MM/DD/YYYY')}>8</MenuItem>
-                  <MenuItem value={moment().format('MM/DD/YYYY')}>9</MenuItem>
-                  <MenuItem value={moment().format('MM/DD/YYYY')}>10</MenuItem>
-                  <MenuItem value={moment().format('MM/DD/YYYY')}>11</MenuItem>
-                  <MenuItem value={moment().format('MM/DD/YYYY')}>12</MenuItem>
-                  </Select>
-                  </FormControl>
+            <div className={ timeContainer }>
+                <FormControl>
+                    <Select  defaultText={ hour } >
+                        <MenuItem value={ 1 }>1</MenuItem>
+                        <MenuItem value={ 2 }>2</MenuItem>
+                        <MenuItem value={ 3 }>3</MenuItem>
+                        <MenuItem value={ 4 }>4</MenuItem>
+                        <MenuItem value={ 5 }>5</MenuItem>
+                        <MenuItem value={ 6 }>6</MenuItem>
+                        <MenuItem value={ 7 }>7</MenuItem>
+                        <MenuItem value={ 8 }>8</MenuItem>
+                        <MenuItem value={ 9 }>9</MenuItem>
+                        <MenuItem value={ 10 }>10</MenuItem>
+                        <MenuItem value={ 11 }>11</MenuItem>
+                        <MenuItem value={ 12 }>12</MenuItem>
+                    </Select>
+                </FormControl>
+                <FormControl>
+                    <Select>
+                        <MenuItem value={moment().format('MM/DD/YYYY')}>00</MenuItem>
+                        <MenuItem value={moment().format('MM/DD/YYYY')} >30</MenuItem>
+                    </Select>
+                </FormControl>
+                <FormControl>
+                    <Select>
+                        <MenuItem value={moment().format('MM/DD/YYYY')}>AM</MenuItem>
+                        <MenuItem value={moment().format('MM/DD/YYYY')}>PM</MenuItem>
+                    </Select>
+                </FormControl>
+            </div>
             <TextField 
                     className={ titleInput }
                     multiline

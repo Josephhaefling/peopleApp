@@ -63,7 +63,8 @@ const SignUp = (props) => {
     },[])
 
     const handleClick = useCallback((e) => {
-        // I am gonna sign a user up
+        e.preventDefault()
+        console.log('image: ', image)
         const newUser = { userName, password: choosePassword, firstName, lastName, email, isAdmin: false, image }
         isMatchingPassword(choosePassword, confirmPassword)
         createNewUser(newUser)
@@ -121,8 +122,7 @@ const SignUp = (props) => {
                    <FileBase 
                     type="file" 
                     multiple={false} 
-                    onDone={({ base64 }) => 
-                    setImage(base64 )} 
+                    onDone={({ base64 }) => setImage(base64)} 
                     />
                 </div>
                 <TextField 

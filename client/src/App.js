@@ -8,6 +8,7 @@ import EditDescription from './Components/EditDescription/EditDescription';
 import EditEventView from './Components/Views/EditEventView/EditEventView';
 import { Switch, Route } from 'react-router-dom';
 import { createEvent, getAllEvents } from './api';
+import { getAllUsers } from './api';
 
 
 function App() {
@@ -17,18 +18,23 @@ function App() {
   const [ events, setEvents ] = useState('')
   const [ description, setDescription ] = useState('')
   const [ isLoggedIn, setIsLoggedIn ] =useState('')
+  const [ users, setUsers ] = useState()
+
+
+
+  console.log('current event in app:', currentEvent)
 
   const getData = async () => {
     const events = await getAllEvents() 
+    const allUsers = await getAllUsers()
     setEvents(events.data)
+    setUsers(allUsers.data)
   }
   
   useEffect(() => {
     setIsLoggedIn(false)
     getData()
   }, [])
-
-  console.log('current event:', currentEvent)
 
   return (
     <Switch>
@@ -92,10 +98,9 @@ function App() {
           return (
             <div>
               <Header isLoggedIn={ isLoggedIn } setCurrentEvent={ setCurrentEvent } />
-              <EventView />
+              <EventView eventInfo={ currentEvent } users={ users } />
             </div>
-          )
-            
+          ) 
         }}
       ></Route>
       <Route
@@ -129,6 +134,7 @@ function App() {
               {
               currentUser.isAdmin ? 
                 <AdminView 
+                  users={ users }
                   currentUser={ currentUser }
                   setCurrentUser={ setCurrentUser } 
                   description={ description } 
@@ -139,6 +145,7 @@ function App() {
                   setCurrentEvent={ setCurrentEvent } 
                 /> : 
                 <MainView 
+                  users={ users }
                   currentUser={ currentUser } 
                   setCurrentUser={ setCurrentUser }
                   description={ description }

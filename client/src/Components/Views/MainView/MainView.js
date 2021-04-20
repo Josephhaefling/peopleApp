@@ -10,6 +10,7 @@ import useStyles from './styles';
 const MainView = (props) => {
 
     const { 
+        users,
         currentUser, 
         setEvents, 
         events, 
@@ -31,7 +32,7 @@ const MainView = (props) => {
                     description={description} 
                     setDescription={setDescription} 
                 />
-                <Members />
+                <Members users={ users } />
                 {/* <Photos /> */}
                 {/* <Discussion />   */}
             </div>

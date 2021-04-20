@@ -9,13 +9,12 @@ import descriptionRoutes from './Routes/Description.js';
 
 const app = express()
 
-app.use(bodyParser.json({limit: '30mb', extended: true}))
-app.use(bodyParser.urlencoded({limit: '30mb', extended: 'true'}))
+app.use(express.json({limit: '30mb', extended: true}))
+app.use(express.urlencoded({limit: '30mb', extended: true}))
 app.use(cors())
 app.use('/descriptions', descriptionRoutes)
 app.use('/users', userRoutes)
 app.use('/events', eventRoutes)
-
 
 const CONNECTION_URL = 'mongodb+srv://meanJosephBean:pe@chyPup79@cluster0.tnrqb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 const PORT = process.env.Port || 5001

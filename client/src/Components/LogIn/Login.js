@@ -43,10 +43,10 @@ const LogIn = (props) => {
     const [ password, setPassword ] = useState()
     const [ isUser, setIsUser ] = useState(false)
     const [ isComplete, setIsComplete ] = useState()
-    const { logIn, setLogIn, setCurrentUser, setIsLoggedIn } = props
+    const { isLoggedIn, setIsLoggedIn, setCurrentUser } = props
     const classes = useStyles();
 
-    const handleClick = useCallback(() => setLogIn(!logIn),[logIn, setLogIn])
+    const handleClick = useCallback(() => setIsLoggedIn(!isLoggedIn),[isLoggedIn, setIsLoggedIn])
 
     const onSubmit = async (e, name, passcode) => {
         const currentUser = await getCurrentUser(name, passcode)

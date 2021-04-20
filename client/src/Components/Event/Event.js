@@ -63,6 +63,7 @@ const Event = (props) => {
     return (
         <div className={ eventContainer }>
             <Link
+                onClick={ () => setCurrentEvent(eventInfo) }
                 style={ {textDecoration: 'none', color: '#25291C'} }
                 to='/event'
             >

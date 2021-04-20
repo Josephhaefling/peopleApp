@@ -1,23 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { getAllUsers } from '../../api';
+// import { getAllUsers } from '../../api';
 import { createMembers } from './useMembers';
 import useStyles from './styles';
 
 const Members = (props) => {
 
-    const [ users, setUsers ] = useState()
+    const { users, setUsers } = props
+    console.log('users in members: ', users)
     const members = users && (createMembers(users))
     const styles = useStyles()
     const { membersContainer, header, imageContainer } = styles
-
-    const getUsers = async () => {
-        const allUsers = await getAllUsers()
-        setUsers(allUsers.data)
-    }
-
-    useEffect(() => {
-        getUsers()
-    }, [])
 
     return (
         <div className={membersContainer}>

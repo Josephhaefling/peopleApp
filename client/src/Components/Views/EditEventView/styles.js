@@ -6,9 +6,11 @@ export default makeStyles(() => ({
         flexDirection: 'column',
     }, 
     titleInput: {
-        border: '1px solid red'
     },
     descriptionInput: {
-        border: '1px solid red'
+    },
+    timeContainer: {
+        display: 'flex'
     }
+
 }))

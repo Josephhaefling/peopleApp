@@ -11,6 +11,7 @@ import { getAllEvents } from '../../../api';
 const AdminView = (props) => {
 
     const { 
+        users,
         currentUser, 
         setEvents, 
         events, 
@@ -31,7 +32,7 @@ const AdminView = (props) => {
                     description={description} 
                     setDescription={setDescription} 
                 />
-                <Members />
+                <Members users={ users } />
                 <Photos />
                 <Discussion />  
             </div>
