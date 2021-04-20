@@ -1,38 +1,43 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Typography, Button } from '@material-ui/core';
 import useStyles from './styles';
 
 const Header = (props) => {
 
-    const { isLoggedIn } = props
+    const { isLoggedIn, setCurrentEvent } = props
     const styles = useStyles()
     const { header, button, navBar } = styles
 
     const getButtonType = () => {
-       return isLoggedIn ?
-        (
-            <Link
-                style={{textDecoration: 'none', color: '#25291C'}}
-                to='/login'
-            >
+       if (isLoggedIn) {
+           return (
+               <Link
+               style={{textDecoration: 'none', color: '#25291C'}}
+               to='/login'
+               >
                 <Button className={button}>
                     Profile
                 </Button>   
             </Link>
-        ) :
-        (
-            <Link
-                style={{textDecoration: 'none', color: '#25291C'}}
-                to='/login'
-            >
-                <Button className={button}>
-                    Log In
-                </Button>   
-            </Link>
-        )
-
+            )
+        } else {
+          return (
+                <Link
+                    style={{textDecoration: 'none', color: '#25291C'}}
+                    to='/login'
+                >
+                    <Button className={button}>
+                        Log In
+                    </Button>   
+                </Link>
+            )
+        }
     }
+
+    const clearCurrentEvent = useCallback(() => {
+        setCurrentEvent('')
+    }, [ setCurrentEvent ])
 
     return (
         <AppBar
@@ -42,6 +47,7 @@ const Header = (props) => {
         >
             <Typography className={header} element='h1'>
                 <Link
+                onClick={ clearCurrentEvent }
                 style={{textDecoration: 'none', color: '#FEFEFE'}}
                 to='/'
             >

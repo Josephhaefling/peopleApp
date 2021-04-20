@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Description from '../../Description/Description';
 import UpComingEvents from '../../UpcomingEvents/UpcomingEvents';
 import Members from '../../Members/Members';
 import Photos from '../../Photos/Photos';
 import Discussion from '../../Discussion/Discussion';
-import { getAllUsers } from '../../../api';
+// import { getAllUsers } from '../../../api';
 import useStyles from './styles';
+import { getAllEvents } from '../../../api';
 
 const AdminView = (props) => {
 
@@ -37,11 +38,11 @@ const AdminView = (props) => {
             <div className={column2}>
                 <div>
                     <UpComingEvents 
-                        currentEvent={currentEvent}
-                        setCurrentEvent={setCurrentEvent}
+                        currentEvent={ currentEvent }
+                        setCurrentEvent={ setCurrentEvent }  
                         currentUser={ currentUser } 
                         setEvents={ setEvents } 
-                        events={ events} 
+                        events={ events } 
                     />
                 </div>
             </div>

@@ -1,7 +1,13 @@
-export const findCurrentEvent = (currentEvent, events, setEvents) => {
+export const findCurrentEvent = (currentEvent, events) => {
     const { _id } = currentEvent
-    const thing = events.find(event => event._id === _id)
-    const index = events.indexOf(thing)
+    const event = events.find(event => event._id === _id)
+    const index = events.indexOf(event)
     events[index] = currentEvent
-    setEvents(events)
+    return currentEvent
+}
+
+export const removeCurrentEvent = (currentEvent, events) => {
+    const { _id } = currentEvent
+    const modifiedEvents = events.filter(event => event._id !== _id)
+    return modifiedEvents
 }

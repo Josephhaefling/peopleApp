@@ -12,46 +12,53 @@ const Event = (props) => {
     const { title, attending, description, date, time } = eventInfo
     const styles = useStyles()
     const {attendeesContainer, eventContainer, header, button} = styles
-    
+
     const isAdministrator = () => {
-        return isAdmin ?
-        <Link 
-            to={`/edit:${ title }`} 
-            style={{textDecoration: 'none'}}
-            onClick={() => handleClick() } 
-        >
-            <Button 
-                className={ button } 
-                variant='contained'
-            >
-                Edit Event
-            </Button>
-        </Link> :
-        <Button 
-            className={ button } 
-            onClick={(e) => handleClick(e) } 
-            variant='contained'
-         >
-            Attend
-        </Button>
+        if(isAdmin) {
+            return (
+                <Link 
+                    to={`/edit:${ title }`} 
+                    style={{textDecoration: 'none'}}
+                    onClick={(e) => handleClick(e) } 
+                >
+                    <Button 
+                        className={ button } 
+                        variant='contained'
+                    >
+                        Edit Event
+                    </Button>
+                </Link>
+            )
+        } else {
+            return (
+                <Button 
+                    className={ button } 
+                    onClick={(e) => handleClick(e) } 
+                    variant='contained'
+                >
+                    Attend
+                </Button>
+            )
+        }
     }
 
     const handleClick = useCallback((e) => {
-        e.preventDefault()
-        const updatedUser = updateUser(currentUser, currentEvent)
-        const updatedEvent = updateEvent(currentUser, currentEvent)
-        updateEvents(events, setEvents, updatedEvent) 
-        setCurrentUser(updatedUser)
-    },[ currentEvent, currentUser, events, setEvents, setCurrentUser ])
+        if(!isAdmin) {
+            e.preventDefault()
+            const updatedUser = updateUser(currentUser, eventInfo)
+            const updatedEvent = updateEvent(currentUser, eventInfo)
+            updateEvents(events, setEvents, updatedEvent) 
+            setCurrentEvent(eventInfo)
+            setCurrentUser(updatedUser)
+        } else {
+            setCurrentEvent(eventInfo)
+        }
+    },[ currentUser, events, setEvents, setCurrentUser, eventInfo, isAdmin, setCurrentEvent ])
 
     useEffect(() => {
         const userAttending = currentUser && getIsAttending(eventInfo, currentUser)
         setIsAttending(userAttending)
     }, [currentUser, eventInfo])
-
-    useEffect(() => {
-        setCurrentEvent(eventInfo)      
-    }, [ currentEvent, setCurrentEvent, eventInfo ])
 
     return (
         <div className={ eventContainer }>

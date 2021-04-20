@@ -17,6 +17,8 @@ export const createEvent = (newEvent) => axios.post(eventsUrl, newEvent)
 
 export const editEvent = (id, editedEvent) => axios.put(`${eventsUrl}/${id}`, editedEvent)
 
+export const deleteEvent = (id) => axios.delete(`${eventsUrl}/${id}`)
+
 export const fetchDescription = () => axios.get(`${descriptionUrl}/${descriptionId}`)
 
 export const editDescription = (descriptionUrl, newDescription) => axios.put(descriptionUrl, newDescription)

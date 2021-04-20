@@ -24,21 +24,15 @@ const UpcomingEvents = (props) => {
     const classes = useStyles();
     const eventsList = events && createEvents(events, setCurrentEvent, currentEvent, currentUser, setCurrentUser, setEvents)
 
-    const setAllEvents = useCallback(async () => {
-        const events = await getEvents()
-        setEvents(events)
-    }, [setEvents])
-
-    useEffect(() => {
-        setAllEvents()
-    }, [setAllEvents])
-
     return (    
         <div className={classes.eventsContainer}>
             <Typography classes={{ root: classes.title }}>Upcoming Events</Typography>
             {
                 currentUser.isAdmin && 
-                <Link to='/create_event' style={{textDecoration: 'none'}}>
+                <Link 
+                    to='/create_event' 
+                    style={{textDecoration: 'none'}}
+                >
                     <Button>
                         Create Event
                     </Button>

@@ -1,13 +1,13 @@
 import Event from '../Event/Event';
-import { getAllEvents } from '../../api';
+// import { getAllEvents } from '../../api';
 
-export const getEvents = async () => {
-    const events = await getAllEvents() 
-    return events.data
-}
+// export const getEvents = async () => {
+//     const events = await getAllEvents() 
+//     return events.data
+// }
 
 export const createEvents = (events, setCurrentEvent, currentEvent, currentUser, setCurrentUser, setEvents) => {
-    const { firstName, isAdmin } = currentUser
+    // const { firstName, isAdmin } = currentUser
     const upComingEvents = events.map(event => {
     return (
         <Event 
