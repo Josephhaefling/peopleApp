@@ -3,17 +3,17 @@ import { makeStyles } from '@material-ui/core';
 export default makeStyles(() => ({
     navBar: {
         alignItems: 'center',
-        backgroundColor: '#3F84E5',
+        backgroundColor: '#25291C',
         display: 'flex',
         flexDirection: 'row',
         height: '15vh',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         // textAlign: 'center'
     },
     logo: {
-        fontSize: 60,
+        height: '14.5vh',
         justifyContent: 'center',
-        width: '40vw'
+        width: '14vw'
     }, 
     header: {
         color: '#FEFEFE',

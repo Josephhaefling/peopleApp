@@ -31,7 +31,7 @@ const useStyles = makeStyles({
         textTransform: 'capitalize',
         '&:hover': {
         backgroundColor: 'transparent',
-        color: '#5D98E9'
+        color: '#79BEC3'
         },
     },
 });

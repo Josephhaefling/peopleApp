@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { updateEvent, getIsAttending, updateUser, updateEvents } from './useEvent';
+import moment from 'moment';
 import useStyles from './styles';
 
 const Event = (props) => {
@@ -11,7 +12,8 @@ const Event = (props) => {
     const { firstName, isAdmin } = currentUser
     const { title, attending, description, date, time } = eventInfo
     const styles = useStyles()
-    const {attendeesContainer, eventContainer, header, button} = styles
+    const {attendeesContainer, eventContainer, header, button, descriptionContainer} = styles
+    const formattedTime = new moment(time).format('dddd, MMMM Do YYYY, h:mm a')
 
     const isAdministrator = () => {
         if(isAdmin) {
@@ -42,6 +44,34 @@ const Event = (props) => {
         }
     }
 
+    const isLoggedIn = () => {
+        if(currentUser) {
+            return (
+                <Link
+                    onClick={ () => setCurrentEvent(eventInfo) }
+                    style={ {textDecoration: 'none', color: '#25291C'} }
+                    to='/event'
+                >
+                    <h4 className={ header } >{formattedTime}</h4>
+                    <h3>{ title }</h3>
+                    <div>
+                        <p className={ descriptionContainer } >{ firstName ? description : 'Please sign in for more info' }</p>
+                    </div>
+                </Link>
+            )
+        } else {
+            return (
+                <div>
+                    <h4 className={ header } >{formattedTime}</h4>
+                    <h3>{ title }</h3>
+                    <div>
+                        <p className={ descriptionContainer } >{ firstName ? description : 'Please sign in for more info' }</p>
+                    </div> 
+                </div>
+            )
+        }
+    }
+
     const handleClick = useCallback((e) => {
         if(!isAdmin) {
             e.preventDefault()
@@ -62,15 +92,7 @@ const Event = (props) => {
 
     return (
         <div className={ eventContainer }>
-            <Link
-                onClick={ () => setCurrentEvent(eventInfo) }
-                style={ {textDecoration: 'none', color: '#25291C'} }
-                to='/event'
-            >
-                <h4 className={ header } >{`${date} ${time}`}</h4>
-                <h3>{ title }</h3>
-                <p>{ firstName ? description : 'Please sign in for more info' }</p>
-            </Link>
+                { isLoggedIn() }
                 <div className={ attendeesContainer }>
                     {
                         firstName &&

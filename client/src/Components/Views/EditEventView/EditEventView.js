@@ -1,80 +1,97 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { TextField, Button, Select, MenuItem, FormControl, FormHelperText } from '@material-ui/core';
+import { TextField, Button, FormControl } from '@material-ui/core';
 import { findCurrentEvent, removeCurrentEvent } from './useEditEvent';
 import useStyles from './styles';
 import { editEvent, createEvent, deleteEvent } from '../../../api';
 import moment from 'moment';
 
 const EditEventView = (props) => {
-
     const [ eventTitle, setEventTitle ] = useState()
     const [ eventDescription, setEventDescription] = useState()
     const [ eventTime, setEventTime ] = useState()
     const [ eventDate, setEventDate ] = useState()
-    const [ hour, setHour ] = useState('choose hour')
-    const [ minute, setMinute ] = useState('choose minute')
-    const [ timeOfDay, setTimeOfDay ] = useState('choose AM/PM')
+    const [ timeDate, setTimeDate ] = useState()
+    
     const { setCurrentEvent, currentEvent, events, setEvents, currentUser }= props
-    const { date, description, time, title, _id, attending } = currentEvent
+    const { date, description, time, title, _id, attending } = currentEvent && currentEvent
     const styles = useStyles()
     const { eventContainer, titleInput, descriptionInput, timeContainer } = styles
 
+    const createEventTime = useCallback((e) => {
+        e.preventDefault()
+        e.target.id === 'date' ? setEventDate(e.target.value) : setEventTime(e.target.value)
+        if(eventTime && eventDate) {
+        const newMoment = new moment(`${eventDate} ${eventTime}`)
+        setTimeDate(newMoment)
+        }
+    }, [ setTimeDate , eventDate, eventTime ])
 
     const handleClick = useCallback(async (e) => {
-        const updatedEvent = { attending, _id, title: eventTitle, description: eventDescription, time: eventTime, date: eventDate }
-
+        const updatedEvent = { attending, _id, title: eventTitle, description: eventDescription, time: timeDate, date: eventDate }
         const { innerText } = e.target
         if (innerText === 'SUBMIT') {
+            console.log('time and date')
             const editedEvent = findCurrentEvent(updatedEvent, events)
             editEvent(_id, editedEvent)
             setCurrentEvent('')
         } else if(innerText === 'DELETE'){
             const eventToDelete = findCurrentEvent(updatedEvent, events)
             const modifiedEvents = removeCurrentEvent(updatedEvent, events)
-            console.log(eventToDelete)
             deleteEvent(eventToDelete._id)
             setEvents(modifiedEvents)
             setCurrentEvent('')
         } else {
             updatedEvent.attending = [ currentUser._id]
-            createEvent(updatedEvent)
+            createEvent(updatedEvent)            
             setEvents([...events, updatedEvent])
         }
-    }, [ setCurrentEvent, events, _id, attending, eventDate, eventDescription, eventTime, eventTitle, setEvents ])
+    }, [ setCurrentEvent, events, _id, attending, eventDate, eventDescription, eventTitle, setEvents, currentUser._id, timeDate ])
 
-console.log(moment().format('MM/DD/YYYY'))
+    //use effect is not setting eventDate or eventTime
+    useEffect(() => {
+        if(currentEvent) {
+            console.log('hi')
+            const currentEventDate = new moment(time).format('DD/MM/YYYY')
+            const currentEventTime = new moment(time).format('hh:mm a')
+            setEventDate(currentEventDate)
+            setEventTime(currentEventTime)
+            console.log('event date:', eventDate)
+            console.log('event time', eventTime)
+        }
+    }, [])
+
 
 return (
         <div className={ eventContainer }>
             <div className={ timeContainer }>
                 <FormControl>
-                    <Select  defaultText={ hour } >
-                        <MenuItem value={ 1 }>1</MenuItem>
-                        <MenuItem value={ 2 }>2</MenuItem>
-                        <MenuItem value={ 3 }>3</MenuItem>
-                        <MenuItem value={ 4 }>4</MenuItem>
-                        <MenuItem value={ 5 }>5</MenuItem>
-                        <MenuItem value={ 6 }>6</MenuItem>
-                        <MenuItem value={ 7 }>7</MenuItem>
-                        <MenuItem value={ 8 }>8</MenuItem>
-                        <MenuItem value={ 9 }>9</MenuItem>
-                        <MenuItem value={ 10 }>10</MenuItem>
-                        <MenuItem value={ 11 }>11</MenuItem>
-                        <MenuItem value={ 12 }>12</MenuItem>
-                    </Select>
-                </FormControl>
-                <FormControl>
-                    <Select>
-                        <MenuItem value={moment().format('MM/DD/YYYY')}>00</MenuItem>
-                        <MenuItem value={moment().format('MM/DD/YYYY')} >30</MenuItem>
-                    </Select>
-                </FormControl>
-                <FormControl>
-                    <Select>
-                        <MenuItem value={moment().format('MM/DD/YYYY')}>AM</MenuItem>
-                        <MenuItem value={moment().format('MM/DD/YYYY')}>PM</MenuItem>
-                    </Select>
+                    <TextField
+                        id="date"
+                        label="Date"
+                        type="date"
+                        defaultValue={ eventDate }
+                        value={ eventDate }
+                        onChange={ (e) => createEventTime(e)}
+                        InputLabelProps={{
+                        shrink: true,
+                    }}
+                    />
+                    <TextField
+                        id="time"
+                        label="Time"
+                        type="time"
+                        defaultValue={ eventTime }
+                        value={ eventTime }
+                        onChange={ (e) => createEventTime(e)}
+                        InputLabelProps={{
+                        shrink: true,
+                        }}
+                        inputProps={{
+                        step: 300, // 5 min
+                        }}
+                    />                  
+                    
                 </FormControl>
             </div>
             <TextField 

@@ -20,8 +20,6 @@ function App() {
   const [ isLoggedIn, setIsLoggedIn ] =useState('')
   const [ users, setUsers ] = useState()
 
-
-
   console.log('current event in app:', currentEvent)
 
   const getData = async () => {
@@ -98,7 +96,7 @@ function App() {
           return (
             <div>
               <Header isLoggedIn={ isLoggedIn } setCurrentEvent={ setCurrentEvent } />
-              <EventView eventInfo={ currentEvent } users={ users } />
+              <EventView eventInfo={ currentEvent } users={ users } currentEvent={ currentEvent } />
             </div>
           ) 
         }}
@@ -116,6 +114,7 @@ function App() {
             <div>
               <Header isLoggedIn={ isLoggedIn } setCurrentEvent={ setCurrentEvent } />
               <EditEventView 
+              currentUser={ currentUser }
                 currentEvent={ currentEvent } 
                 setCurrentEvent={ setCurrentEvent }
                 events={ events }

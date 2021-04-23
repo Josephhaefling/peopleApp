@@ -11,14 +11,14 @@ export default makeStyles(() => ({
         
     }, 
     imageContainer: {
-        height: '8vh',
+        height: '10vh',
         width: '7vw',
 
     },
     imageStyles: {
         height: '100%',
         width: '100%',
-        objectFit: 'cover',
+        objectFit: 'contain',
         objectPosition: 'center',
     },
     nameStyles: {

@@ -11,8 +11,8 @@ import useStyles from './styles';
 const EventView = (props) => {
 
     const styles = useStyles()
-    const { eventPage, eventHeader, mediatorContainer, images, imageContainer, titleStyles, timeStyles, descriptionStyles } = styles
-    const { users, eventInfo } = props
+    const { eventPage, eventHeader, mediatorContainer, images, imageContainer, titleStyles, timeStyles, container } = styles
+    const { users, eventInfo, currentEvent } = props
     const { attending, date, description, time, title,  } = eventInfo
 
     return (
@@ -22,15 +22,17 @@ const EventView = (props) => {
                 <Typography className={ titleStyles} component='h2' > { title } </Typography>
                 <div className={mediatorContainer}>
                     <div className={ imageContainer }>
-                        <img className={ images } src={ bagHead } />
+                        <img className={ images } src={ bagHead } alt={ 'person with a brown bag on their head'} />
                     </div>
                     <Typography component='h6' > { `Moderator: ${attending[0]}` } </Typography>
             </div>
-            <div className={ descriptionStyles }>
+            <div className={ container }>
                 <Typography component='h6'>Details</Typography>
                 <Typography component='body1'>{ description }</Typography>
             </div>
-                <Members users={ attending } /> 
+            <div className={ container } >
+                <Members users={ attending } currentEvent={ currentEvent } /> 
+            </div>
             </div>
 
             <Link to='/'>

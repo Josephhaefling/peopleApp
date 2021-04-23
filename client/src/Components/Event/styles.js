@@ -5,7 +5,7 @@ export default makeStyles(() => ({
         fontFamily: 'Open Sans',
         borderRadius: 3,
         boxShadow: '0px 0px 3px 2px rgba(45, 46, 46, .3)',
-        height: '25vh',
+        height: '30vh',
         width: '44vw',
         '&:hover': {
             animationName: `$pop`,
@@ -15,7 +15,7 @@ export default makeStyles(() => ({
         }    
     },
     header: {
-        color: '#3F84E5',
+        color: '#79bec3',
         fontFamily: 'Libre Franklin'
     },
     button: {
@@ -28,16 +28,16 @@ export default makeStyles(() => ({
         justifyContent: 'space-between',
         height: 'auto'
     },
+    descriptionContainer: {
+        height: '10vh',
+        overflow: 'hidden'
+    },
     '@keyframes pop': {
         '0%': {   
             boxShadow: '0px 0px 4px 2px rgba(45, 46, 46, .3)',
-            // height: '25vh',
-            // width: '44vw' 
         },
         '100%': {   
             boxShadow: '0px 0px 4px 2px rgba(45, 46, 46, .5)',
-            // height: '25.2vh',
-            // width: '44.2vw' 
         },
     },
 }))

@@ -5,7 +5,7 @@ const eventsSchema = mongoose.Schema({
         description: String, 
         attending:[Object],
         date: String,
-        time: String
+        time: Object
 })
 
 const eventsMessage = mongoose.model('eventsSchema', eventsSchema)

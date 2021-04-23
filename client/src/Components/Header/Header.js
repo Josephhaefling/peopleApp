@@ -1,13 +1,14 @@
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Typography, Button } from '@material-ui/core';
+import freeple from '../../Assets/freeple.JPG';
 import useStyles from './styles';
 
 const Header = (props) => {
 
     const { isLoggedIn, setCurrentEvent } = props
     const styles = useStyles()
-    const { header, button, navBar } = styles
+    const { header, button, navBar, logo } = styles
 
     const getButtonType = () => {
        if (isLoggedIn) {
@@ -45,15 +46,13 @@ const Header = (props) => {
             position='static'
             color='inherit'
         >
-            <Typography className={header} element='h1'>
-                <Link
+            <Link
                 onClick={ clearCurrentEvent }
                 style={{textDecoration: 'none', color: '#FEFEFE'}}
                 to='/'
             >
-                People
+                <img className={logo} src={freeple} />
             </Link>
-            </Typography>
             { getButtonType() }
         </AppBar>
     )

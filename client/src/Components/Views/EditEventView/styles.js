@@ -11,6 +11,8 @@ export default makeStyles(() => ({
     },
     timeContainer: {
         display: 'flex'
+    },
+    selector: {
     }
 
 }))
