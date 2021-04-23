@@ -6,12 +6,15 @@ import cors from 'cors';
 import userRoutes from './Routes/Users.js';
 import eventRoutes from './Routes/Events.js';
 import descriptionRoutes from './Routes/Description.js';
+import dotenv from 'dotenv';
 
 const app = express()
+dotenv.config()
 
 app.use(express.json({limit: '30mb', extended: true}))
 app.use(express.urlencoded({limit: '30mb', extended: true}))
 app.use(cors())
+
 app.use('/descriptions', descriptionRoutes)
 app.use('/users', userRoutes)
 app.use('/events', eventRoutes)
