@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const usersUrl = 'http://localhost:5001/users';
-const eventsUrl = 'http://localhost:5001/events';
-const descriptionUrl = 'http://localhost:5001/descriptions';
+const usersUrl = 'https://coloradofreeple.herokuapp.com/users';
+const eventsUrl = 'https://coloradofreeple.herokuapp.com/events';
+const descriptionUrl = 'https://coloradofreeple.herokuapp.com/descriptions';
 const descriptionId = '606e26dc0e99b7224ccb8fa0'
 
 export const createNewUser = (newUser) => axios.post(usersUrl, newUser)

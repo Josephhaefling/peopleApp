@@ -2,47 +2,80 @@ import { makeStyles } from '@material-ui/core';
 
 export default makeStyles(() => ({
     eventHeader: {
+        alignItems: 'center',
+        color: '#79bec3',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
+        marginTop: '2vh'
     },
     eventPage: {
+        alignItems: 'center',
+        borderRadius: 3,
+        backgroundColor: '#25291C',
+        color: '#FEFEFE',
+        boxShadow: '0px 0px 3px 2px rgba(45, 46, 46, .3)',
+        display: 'flex',
         flexDirection: 'column',
-        height: '80vh',
-        marginTop: '5vh'
+        fontFamily: 'Open Sans',
+        height: 'autp',
+        marginBottom: '5vh',
+        marginTop: '5vh',
     }, 
     titleStyles: {
-        marginLeft: '5vw',
-        marginRight: '5vw',
         fontSize: 28,
     },
     timeStyles : {
-        marginLeft: '5vw',
+        color: '#25291C'
+        // marginLeft: '5vw',
     },
     mediatorContainer: {
-        alignItems: 'center',
         display: 'flex',
-        height: '10vh',
-        justifyContent: 'space-around',
-        marginLeft: '3vw',
+        flexDirection: 'column',
+        height: 'auto',
+        marginBottom: '5vh',
+        marginLeft: '1vw',
         objectFit: 'cover',
         width: '30vw'
     }, 
     imageContainer: {
-        height: '7vh',
-        overflow: 'hidden',
-        width: '5vw',
+        alignItems: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        height: 'auto',
+        marginTop: '2vh',
+        width: '7vw'
     },
     images: {
         height: '100%',
+        marginBottom: '1vh',
         objectFit: 'contain',
         objectPosition: 'center',
         width: '100%',
     },
     container: {
-        marginTop: '5vh',
+        height: 'auto',
+        marginBottom: '5vh',
         marginLeft: '5vw',
         marginRight: '5vw',
-        minHeight: '35vh' 
+        marginTop: '5vh',
+        minHeight: '35vh' ,
+        width: '80vw'
+    },
+    buttonContainer: {
+        display: 'flex',
+        height: 'auto',
+        justifyContent: 'center',
+        marginBottom: '2vh',
+        marginLeft: '5vw',
+        marginRight: '5vw',
+        marginTop: '2vh',
+        width: '80vw'
+    }, 
+    largeTitle: {
+        color: '#79bec3',
+    }, 
+    button: {
+        borderColor: '79bec3',
+        color: '#79bec3'
     }
 }))

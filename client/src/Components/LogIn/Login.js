@@ -95,7 +95,7 @@ const LogIn = (props) => {
                 <Link 
                     to={isUser ? '/' : '/login'} 
                     onClick={(e) => onSubmit(e, userName, password)}
-                    style={ {textDecoration: 'none', border: '1px solid red'} }
+                    style={ { textDecoration: 'none' } }
                 >
                     <Button 
                         disabled={!isComplete} 

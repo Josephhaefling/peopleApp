@@ -11,7 +11,7 @@ import useStyles from './styles';
 const EventView = (props) => {
 
     const styles = useStyles()
-    const { eventPage, eventHeader, mediatorContainer, images, imageContainer, titleStyles, timeStyles, container } = styles
+    const { eventPage, eventHeader, mediatorContainer, images, imageContainer, titleStyles, timeStyles, container, buttonContainer, largeTitle, button } = styles
     const { users, eventInfo, currentEvent } = props
     const { attending, date, description, time, title,  } = eventInfo
 
@@ -20,26 +20,28 @@ const EventView = (props) => {
             <div className={ eventHeader }>
                 <Typography className={ timeStyles } component='body1' >Tues January 1st 2020</Typography>
                 <Typography className={ titleStyles} component='h2' > { title } </Typography>
-                <div className={mediatorContainer}>
-                    <div className={ imageContainer }>
-                        <img className={ images } src={ bagHead } alt={ 'person with a brown bag on their head'} />
-                    </div>
-                    <Typography component='h6' > { `Moderator: ${attending[0]}` } </Typography>
             </div>
             <div className={ container }>
-                <Typography component='h6'>Details</Typography>
+                <h3 className={ largeTitle }>Details</h3>
                 <Typography component='body1'>{ description }</Typography>
             </div>
             <div className={ container } >
+                <div className={mediatorContainer}>
+                    <h3 className={ largeTitle } component='h3' > { `Moderator` } </h3>
+                    <div className={ imageContainer }>
+                        <img className={ images } src={ bagHead } alt={ 'person with a brown bag on their head'} />
+                        <Typography component='h5'>{ attending[0].userName }</Typography>
+                    </div>
+                </div>
                 <Members users={ attending } currentEvent={ currentEvent } /> 
             </div>
+            <div className={ buttonContainer }>
+                <Link to='/' style={ { textDecoration: 'none' } }>
+                    <Button className={ button } variant='outlined' color='#79bec3'>
+                        Back
+                    </Button>
+                </Link>
             </div>
-
-            <Link to='/'>
-                <Button>
-                Back
-                </Button>
-            </Link>
         </div>
     )
 }

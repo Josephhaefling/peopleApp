@@ -2,15 +2,14 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import dotenv from 'dotenv';
 
 import userRoutes from './Routes/Users.js';
 import eventRoutes from './Routes/Events.js';
 import descriptionRoutes from './Routes/Description.js';
-import dotenv from 'dotenv';
 
 const app = express()
 dotenv.config()
-
 app.use(express.json({limit: '30mb', extended: true}))
 app.use(express.urlencoded({limit: '30mb', extended: true}))
 app.use(cors())
@@ -20,11 +19,12 @@ app.use('/users', userRoutes)
 app.use('/events', eventRoutes)
 
 app.get('/', (req, res) => {
-    res.send('hello to joe')
+    console.log('hiiiiiiiii!')
+    res.send('Hello there Freeple admin')
 })
 
-// const CONNECTION_URL = 'mongodb+srv://meanJosephBean:pe@chyPup79@cluster0.tnrqb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
-const PORT = process.env.Port || 5001
+const PORT = process.env.PORT || 5001
+console.log('port: ', process.env.PORT)
 
 mongoose.connect(process.env.CONNECTION_URL, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => app.listen(PORT, () => console.log(`Server running on port ${PORT}`)))

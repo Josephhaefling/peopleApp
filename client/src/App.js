@@ -6,10 +6,9 @@ import EventView from './Components/Views/EventView/EventView';
 import LoginView from './Components/Views/LoginView/LoginView';
 import EditDescription from './Components/EditDescription/EditDescription';
 import EditEventView from './Components/Views/EditEventView/EditEventView';
+import useStyles from './appStyles';
 import { Switch, Route } from 'react-router-dom';
-import { createEvent, getAllEvents } from './api';
-import { getAllUsers } from './api';
-
+import { getAllEvents, getAllUsers } from './api';
 
 function App() {
 
@@ -19,6 +18,8 @@ function App() {
   const [ description, setDescription ] = useState('')
   const [ isLoggedIn, setIsLoggedIn ] =useState('')
   const [ users, setUsers ] = useState()
+  const styles = useStyles()
+  const { eventView } = styles
 
   console.log('current event in app:', currentEvent)
 
@@ -94,7 +95,7 @@ function App() {
         path='/event'
         render={()=> {
           return (
-            <div>
+            <div className={ eventView }>
               <Header isLoggedIn={ isLoggedIn } setCurrentEvent={ setCurrentEvent } />
               <EventView eventInfo={ currentEvent } users={ users } currentEvent={ currentEvent } />
             </div>

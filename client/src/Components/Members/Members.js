@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { getAllUsers } from '../../api';
 import { createMembers } from './useMembers';
 import useStyles from './styles';
 

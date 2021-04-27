@@ -16,7 +16,7 @@ const EditEventView = (props) => {
     const { setCurrentEvent, currentEvent, events, setEvents, currentUser }= props
     const { date, description, time, title, _id, attending } = currentEvent && currentEvent
     const styles = useStyles()
-    const { eventContainer, titleInput, descriptionInput, timeContainer } = styles
+    const { eventContainer, titleInput, descriptionInput, timeContainer, timeDateInput, buttonContainer, formContainer } = styles
 
     const createEventTime = useCallback((e) => {
         e.preventDefault()
@@ -28,110 +28,111 @@ const EditEventView = (props) => {
     }, [ setTimeDate , eventDate, eventTime ])
 
     const handleClick = useCallback(async (e) => {
+        e.preventDefault()
         const updatedEvent = { attending, _id, title: eventTitle, description: eventDescription, time: timeDate, date: eventDate }
         const { innerText } = e.target
         if (innerText === 'SUBMIT') {
-            console.log('time and date')
             const editedEvent = findCurrentEvent(updatedEvent, events)
             editEvent(_id, editedEvent)
             setCurrentEvent('')
-        } else if(innerText === 'DELETE'){
+        } else if(innerText === 'DELETE') {
             const eventToDelete = findCurrentEvent(updatedEvent, events)
             const modifiedEvents = removeCurrentEvent(updatedEvent, events)
             deleteEvent(eventToDelete._id)
             setEvents(modifiedEvents)
             setCurrentEvent('')
         } else {
-            updatedEvent.attending = [ currentUser._id]
+            updatedEvent.attending = [ { _id: currentUser._id, userName: currentUser.userName, image: currentUser.image}]
             createEvent(updatedEvent)            
             setEvents([...events, updatedEvent])
         }
-    }, [ setCurrentEvent, events, _id, attending, eventDate, eventDescription, eventTitle, setEvents, currentUser._id, timeDate ])
+    }, [ setCurrentEvent, events, _id, attending, eventDate, eventDescription, eventTitle, setEvents, currentUser._id, timeDate, currentUser.image, currentUser.userName ])
 
     //use effect is not setting eventDate or eventTime
     useEffect(() => {
         if(currentEvent) {
-            console.log('hi')
             const currentEventDate = new moment(time).format('DD/MM/YYYY')
             const currentEventTime = new moment(time).format('hh:mm a')
+            console.log('current time: ', currentEventTime)
             setEventDate(currentEventDate)
             setEventTime(currentEventTime)
-            console.log('event date:', eventDate)
-            console.log('event time', eventTime)
         }
     }, [])
 
 
 return (
         <div className={ eventContainer }>
-            <div className={ timeContainer }>
-                <FormControl>
-                    <TextField
-                        id="date"
-                        label="Date"
-                        type="date"
-                        defaultValue={ eventDate }
-                        value={ eventDate }
-                        onChange={ (e) => createEventTime(e)}
-                        InputLabelProps={{
-                        shrink: true,
-                    }}
-                    />
-                    <TextField
-                        id="time"
-                        label="Time"
-                        type="time"
-                        defaultValue={ eventTime }
-                        value={ eventTime }
-                        onChange={ (e) => createEventTime(e)}
-                        InputLabelProps={{
-                        shrink: true,
+            <FormControl className={ formContainer }>
+                <div className={ timeContainer }>
+                        <TextField
+                            id="date"
+                            label="Date"
+                            type="date"
+                            className={ timeDateInput }
+                            defaultValue={ eventDate }
+                            value={ eventDate }
+                            onChange={ (e) => createEventTime(e)}
+                            InputLabelProps={{
+                            shrink: true,
                         }}
-                        inputProps={{
-                        step: 300, // 5 min
-                        }}
-                    />                  
-                    
-                </FormControl>
-            </div>
-            <TextField 
-                    className={ titleInput }
-                    multiline
-                    rows={2}
-                    defaultValue={currentEvent && currentEvent.title}
-                    variant='outlined'
-                    label='event name'
-                    onChange={(e) => setEventTitle(e.target.value)}
-                />
-            <TextField 
-                    className={ descriptionInput }
-                    multiline
-                    rows={20}
-                    defaultValue={currentEvent && currentEvent.description}
-                    variant='outlined'
-                    label='event description'
-                    onChange={(e) => setEventDescription(e.target.value)}
-            />
-            <Link 
-                to={'/'} 
-                style={ {textDecoration: 'none'} }
-                onClick={(e) => handleClick(e)
-                }
-            >
-                <Button>
-                    {currentEvent ? 'Submit' : 'Create Event'}
-                </Button>
-            </Link>
-            <Link 
-                to={'/'} 
-                style={ {textDecoration: 'none'} }
-                onClick={(e) => handleClick(e)
-                }
-            >
-                <Button>
-                    {currentEvent && 'Delete'}
-                </Button>
-            </Link>
+                        />
+                        <TextField
+                            id="time"
+                            label="Time"
+                            type="time"
+                            className={ timeDateInput }
+                            defaultValue={ eventTime }
+                            value={ eventTime }
+                            onChange={ (e) => createEventTime(e)}
+                            InputLabelProps={{
+                            shrink: true,
+                            }}
+                            inputProps={{
+                            step: 300, // 5 min
+                            }}
+                        />                  
+                </div>
+                <TextField 
+                        className={ titleInput }
+                        multiline
+                        rows={2}
+                        defaultValue={currentEvent && currentEvent.title}
+                        variant='outlined'
+                        label='event name'
+                        onChange={(e) => setEventTitle(e.target.value)}
+                        />
+                <TextField 
+                        className={ descriptionInput }
+                        multiline
+                        rows={20}
+                        defaultValue={currentEvent && currentEvent.description}
+                        variant='outlined'
+                        label='event description'
+                        onChange={(e) => setEventDescription(e.target.value)}
+                        />
+                <div className={ buttonContainer }>   
+                    <Link 
+                        to={'/'} 
+                        style={ {textDecoration: 'none'} }
+                        onClick={(e) => handleClick(e)
+                        }
+                        >
+                        <Button variant='contained'>
+                            {currentEvent ? 'Submit' : 'Create Event'}
+                        </Button>
+                    </Link>
+                    <Link 
+                        to={'/'} 
+                        style={ {textDecoration: 'none'} }
+                        onClick={(e) => handleClick(e)
+                        }
+                        >
+                        <Button variant='contained'>
+                            {currentEvent && 'Delete'}
+                        </Button>
+                    </Link>
+                </div>
+            </FormControl>
         </div>
     )
 }
