@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Typography, Button } from '@material-ui/core';
-import freeple from '../../Assets/freeple.JPG';
+import freeple from '../../Assets/ColoradoFreeple.png';
 import useStyles from './styles';
 
 const Header = (props) => {
@@ -15,7 +15,7 @@ const Header = (props) => {
            return (
                <Link
                style={{textDecoration: 'none', color: '#25291C'}}
-               to='/login'
+               to='/edit_profile'
                >
                 <Button className={button}>
                     Profile

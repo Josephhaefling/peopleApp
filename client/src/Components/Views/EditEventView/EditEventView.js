@@ -28,7 +28,7 @@ const EditEventView = (props) => {
     }, [ setTimeDate , eventDate, eventTime ])
 
     const handleClick = useCallback(async (e) => {
-        e.preventDefault()
+        
         const updatedEvent = { attending, _id, title: eventTitle, description: eventDescription, time: timeDate, date: eventDate }
         const { innerText } = e.target
         if (innerText === 'SUBMIT') {
@@ -51,14 +51,13 @@ const EditEventView = (props) => {
     //use effect is not setting eventDate or eventTime
     useEffect(() => {
         if(currentEvent) {
-            const currentEventDate = new moment(time).format('DD/MM/YYYY')
-            const currentEventTime = new moment(time).format('hh:mm a')
-            console.log('current time: ', currentEventTime)
+            const currentEventDate = new moment(time).format('YYYY-MM-DD')
+            const currentEventTime = new moment(time).format('HH:MM')
             setEventDate(currentEventDate)
             setEventTime(currentEventTime)
+            console.log('current time: ', currentEventDate)
         }
     }, [])
-
 
 return (
         <div className={ eventContainer }>
@@ -69,7 +68,7 @@ return (
                             label="Date"
                             type="date"
                             className={ timeDateInput }
-                            defaultValue={ eventDate }
+                            defaultValue='2021-01-01'
                             value={ eventDate }
                             onChange={ (e) => createEventTime(e)}
                             InputLabelProps={{
@@ -81,7 +80,7 @@ return (
                             label="Time"
                             type="time"
                             className={ timeDateInput }
-                            defaultValue={ eventTime }
+                            defaultValue='12:00'
                             value={ eventTime }
                             onChange={ (e) => createEventTime(e)}
                             InputLabelProps={{
@@ -124,8 +123,7 @@ return (
                     <Link 
                         to={'/'} 
                         style={ {textDecoration: 'none'} }
-                        onClick={(e) => handleClick(e)
-                        }
+                        onClick={(e) => handleClick(e)}
                         >
                         <Button variant='contained'>
                             {currentEvent && 'Delete'}

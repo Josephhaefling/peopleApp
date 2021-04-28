@@ -11,7 +11,7 @@ export default makeStyles(() => ({
     eventPage: {
         alignItems: 'center',
         borderRadius: 3,
-        backgroundColor: '#25291C',
+        backgroundColor: 'rgba(37, 41, 28, .9)',
         color: '#FEFEFE',
         boxShadow: '0px 0px 3px 2px rgba(45, 46, 46, .3)',
         display: 'flex',
@@ -22,10 +22,11 @@ export default makeStyles(() => ({
         marginTop: '5vh',
     }, 
     titleStyles: {
+        color: '#FEFEFE',
         fontSize: 28,
     },
     timeStyles : {
-        color: '#25291C'
+        color: '#79bec3',
         // marginLeft: '5vw',
     },
     mediatorContainer: {

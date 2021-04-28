@@ -19,7 +19,6 @@ app.use('/users', userRoutes)
 app.use('/events', eventRoutes)
 
 app.get('/', (req, res) => {
-    console.log('hiiiiiiiii!')
     res.send('Hello there Freeple admin')
 })
 

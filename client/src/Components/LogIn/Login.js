@@ -41,18 +41,19 @@ const LogIn = (props) => {
 
     const [ userName, setUserName ] = useState()
     const [ password, setPassword ] = useState()
-    const [ isUser, setIsUser ] = useState(false)
     const [ isComplete, setIsComplete ] = useState()
-    const { isLoggedIn, setIsLoggedIn, setCurrentUser } = props
+    const { isRegistered, setisRegistered, setCurrentUser, currentUser } = props
     const classes = useStyles();
 
-    const handleClick = useCallback(() => setIsLoggedIn(!isLoggedIn),[isLoggedIn, setIsLoggedIn])
+    const handleClick = useCallback(() => setisRegistered(!isRegistered),[isRegistered, setisRegistered])
+    // const handleClick = () => console.log('i worked')
 
     const onSubmit = async (e, name, passcode) => {
         const currentUser = await getCurrentUser(name, passcode)
-        setIsUser(!isUser)
-        setCurrentUser(currentUser)
-        setIsLoggedIn(true)
+        if(currentUser) {
+            setCurrentUser(currentUser)
+            setisRegistered(true)
+        } 
     }
 
       useEffect(() => {
@@ -93,7 +94,7 @@ const LogIn = (props) => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <Link 
-                    to={isUser ? '/' : '/login'} 
+                    to={ '/' } 
                     onClick={(e) => onSubmit(e, userName, password)}
                     style={ { textDecoration: 'none' } }
                 >
@@ -106,7 +107,7 @@ const LogIn = (props) => {
                     </Button>
                 </Link>
                 <Button 
-                    onClick={handleClick} 
+                    // onClick={ handleClick } 
                     classes={{ root: `${classes.text} ${classes.font}` }}
                 > 
                     Sign up

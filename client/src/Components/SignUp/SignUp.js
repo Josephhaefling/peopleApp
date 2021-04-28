@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useCallback} from 'react';
-import { Button, formatMs, TextField, Typography, FormControl } from '@material-ui/core';
+import { Button, TextField, Typography, FormControl } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import { createNewUser } from '../../api';
 import { isMatchingPassword } from './useSignUp';
 import { makeStyles } from '@material-ui/core';
@@ -39,7 +40,7 @@ const useStyles = makeStyles({
 
 const SignUp = (props) => {
 
-    const { isLoggedIn, setIsLoggedIn } = props
+    const { currentUser } = props
     const classes = useStyles();
     const [ userName, setUserName ] = useState('')
     const [ choosePassword, setChoosePassword ] = useState('')
@@ -62,9 +63,9 @@ const SignUp = (props) => {
         setLastName('')
     },[])
 
+
     const handleClick = useCallback((e) => {
         e.preventDefault()
-        console.log('image: ', image)
         const newUser = { userName, password: choosePassword, firstName, lastName, email, isAdmin: false, image }
         isMatchingPassword(choosePassword, confirmPassword)
         createNewUser(newUser)
@@ -88,7 +89,7 @@ const SignUp = (props) => {
                 }}
                     required
                     id='standard-required'
-                    label='Choose User Name'
+                    label={ currentUser ? 'Update User Name' : 'Choose User Name'}
                     value={ userName }
                     onChange={(e) => setUserName(e.target.value)}
                 />
@@ -100,17 +101,17 @@ const SignUp = (props) => {
                 }}
                     required
                     id='standard-required'
-                    label='Choose Password'
+                    label={ currentUser ? 'Change Password' : 'Choose Password' }
                     defaultValue='ex: cff123!'
                     value={ choosePassword }
                     onChange={(e) => setChoosePassword(e.target.value)}
                 />
                 <TextField 
                  InputLabelProps={{
-                    style: {
-                    fontFamily: 'Open Sans',
-                    },
-                }}
+                        style: {
+                            fontFamily: 'Open Sans',
+                        },
+                    }}
                     required
                     id='standard-required'
                     label='Confirm Password'
@@ -118,13 +119,13 @@ const SignUp = (props) => {
                     value={ confirmPassword }
                     onChange={(e) => setConfirmPassword(e.target.value)}
                 />
-                <div>
+                {/* <div>
                    <FileBase 
                     type="file" 
                     multiple={false} 
                     onDone={({ base64 }) => setImage(base64)} 
                     />
-                </div>
+                </div> */}
                 <TextField 
                  InputLabelProps={{
                     style: {
@@ -133,7 +134,7 @@ const SignUp = (props) => {
                 }}
                     required
                     id='standard-required'
-                    label='First Name'
+                    label={ currentUser ? 'Change First Name' : 'First Name' }
                     defaultValue='ex: cff123!'
                     value={ firstName }
                     onChange={(e) => setFirstName(e.target.value)}
@@ -145,7 +146,7 @@ const SignUp = (props) => {
                     },
                 }}
                     id='standard-required'
-                    label='Last Name'
+                    label={ currentUser ? 'Change Last Name' : 'Last Name' }
                     defaultValue='ex: cff123!'
                     value={ lastName }
                     onChange={(e) => setLastName(e.target.value)}
@@ -157,14 +158,20 @@ const SignUp = (props) => {
                     },
                 }}
                     id='standard-required'
-                    label='Email'
+                    label={ currentUser ? 'Update Email Address' : 'Email Address' }
                     defaultValue='ex: joe@protonmail.com'
                     value={ email }
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <Button classes={{ root: `${classes.text} ${classes.font}` }} onClick={() => setIsLoggedIn(!isLoggedIn)}>Back</Button>
+                <Link to={ currentUser ? '/' : '/login' } >
+                    <Button 
+                        classes={{ root: `${classes.text} ${classes.font}` }} 
+                    >
+                        Back
+                    </Button>
+                </Link>
                 <Button href='/' classes={{ root: `${classes.font} ${classes.button}` }} onClick={(e) => handleClick(e)} variant='contained' disabled={!isComplete}> 
-                    Sign Up
+                    {currentUser ? 'Update Info' : 'Sign Up'}
                 </Button>
             </FormControl>
     )

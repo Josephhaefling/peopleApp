@@ -9,10 +9,18 @@ const LoginView = (props) => {
     const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = props
     const styles = useStyles()
     const { loginPage } = styles
-
+    
+    console.log('current user in login view: ', currentUser)
     return (
         <div className={loginPage}>
-            {!isLoggedIn ? ( <LogIn user={currentUser} setCurrentUser={setCurrentUser} logIn={isLoggedIn} setIsLoggedIn={ setIsLoggedIn } />) : ( <SignUp isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> )}
+            { !isLoggedIn ? 
+            ( 
+            <LogIn currentUser={currentUser} setCurrentUser={setCurrentUser} />
+            ) : 
+            ( 
+            <SignUp isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> 
+            )
+            }
         </div>
     )
 }
