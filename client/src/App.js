@@ -90,7 +90,9 @@ function App() {
               <Header isLoggedIn={ isLoggedIn } setCurrentEvent={ setCurrentEvent } />
               <LoginView 
                 currentUser={ currentUser } 
-                setCurrentUser={ setCurrentUser } 
+                setCurrentUser={ setCurrentUser }
+                isLoggedIn={ isLoggedIn }
+                setIsLoggedIn={ setIsLoggedIn }
                 isRegistered={ isRegistered }
                 setIsRegistered={ setIsRegistered }
               />

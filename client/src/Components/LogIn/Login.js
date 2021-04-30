@@ -42,17 +42,18 @@ const LogIn = (props) => {
     const [ userName, setUserName ] = useState()
     const [ password, setPassword ] = useState()
     const [ isComplete, setIsComplete ] = useState()
-    const { isRegistered, setisRegistered, setCurrentUser, currentUser } = props
+    const { isRegistered, setIsRegistered, setCurrentUser, currentUser, isLoggedIn, setIsLoggedIn } = props
     const classes = useStyles();
 
-    const handleClick = useCallback(() => setisRegistered(!isRegistered),[isRegistered, setisRegistered])
+    const handleClick = useCallback(() => setIsRegistered(!isRegistered),[isRegistered, setIsRegistered])
     // const handleClick = () => console.log('i worked')
 
     const onSubmit = async (e, name, passcode) => {
         const currentUser = await getCurrentUser(name, passcode)
         if(currentUser) {
             setCurrentUser(currentUser)
-            setisRegistered(true)
+            setIsRegistered(true)
+            setIsLoggedIn(true)
         } 
     }
 
@@ -101,13 +102,13 @@ const LogIn = (props) => {
                     <Button 
                         disabled={!isComplete} 
                         variant='contained' 
-                        classes={{ root: `${classes.button} ${classes.font}` }}
+                        classes={{ root: `${classes.button} ${classes.font}` }}     
                     > 
                         Log In
                     </Button>
                 </Link>
                 <Button 
-                    // onClick={ handleClick } 
+                    onClick={ handleClick } 
                     classes={{ root: `${classes.text} ${classes.font}` }}
                 > 
                     Sign up

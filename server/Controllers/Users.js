@@ -1,5 +1,6 @@
 import userMessage from '../Models/UserMessage.js';
 import mongoose from 'mongoose';
+import passport from 'passport';
 
 export const getUsers = async (req, res) => {
     try {
@@ -38,3 +39,29 @@ export const deleteUser = async (req, res) => {
     await userMessage.findByIdAndRemove(id);
     res.json({ message: "User deleted successfully." });
 }
+
+    export const authenticateUser = async (req, res) => {
+        const { userName, password } = req.body
+        console.log('hi')
+        // const { userName, password } = req.body
+        const newUserMessage = new userMessage({ 
+            userName: userName, firstName: '', lastName: '', email: '', events: [], image: ''  })
+        await newUserMessage.findOne({userName: userName}, (err, user) => {
+            if(err) {
+                console.log('yo')
+                return done(err)
+            } else if (!user) {
+                return done(null, false)
+            } else if(user.password !== password) {
+                return done(false)
+            } else {
+                return done(err, user)
+            }
+        })
+        try {
+            // await newLogInMessage.save();
+            res.status(201).json(newUserMessage);
+        } catch (error) {
+            res.status(409).json({ message: error.message });
+       }
+    }

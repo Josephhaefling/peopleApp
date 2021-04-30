@@ -27,6 +27,7 @@ const useStyles = makeStyles({
     },
     font: {
         fontFamily: 'Open Sans',
+        textDecoration: 'none',
     },
     text: {
         textTransform: 'capitalize',
@@ -40,7 +41,7 @@ const useStyles = makeStyles({
 
 const SignUp = (props) => {
 
-    const { currentUser } = props
+    const { currentUser, isRegistered, setIsRegistered } = props
     const classes = useStyles();
     const [ userName, setUserName ] = useState('')
     const [ choosePassword, setChoosePassword ] = useState('')
@@ -69,6 +70,7 @@ const SignUp = (props) => {
         const newUser = { userName, password: choosePassword, firstName, lastName, email, isAdmin: false, image }
         isMatchingPassword(choosePassword, confirmPassword)
         createNewUser(newUser)
+        setIsRegistered(true)
         clearForm()
     },[choosePassword, clearForm, confirmPassword, email, firstName, lastName, userName, image])
 
@@ -163,16 +165,25 @@ const SignUp = (props) => {
                     value={ email }
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <Link to={ currentUser ? '/' : '/login' } >
+                <Link to={ currentUser ? '/' : '/login' }  style={{ textDecoration: 'none' }}>
                     <Button 
                         classes={{ root: `${classes.text} ${classes.font}` }} 
+                        onClick={() => setIsRegistered(true)}
                     >
                         Back
                     </Button>
                 </Link>
-                <Button href='/' classes={{ root: `${classes.font} ${classes.button}` }} onClick={(e) => handleClick(e)} variant='contained' disabled={!isComplete}> 
-                    {currentUser ? 'Update Info' : 'Sign Up'}
-                </Button>
+                <Link to='/login'>
+                    <Button 
+                        href='/' 
+                        classes={{ root: `${classes.font} ${classes.button}` }} 
+                        onClick={(e) => handleClick(e)} 
+                        variant='contained' 
+                        disabled={!isComplete}
+                        > 
+                        {currentUser ? 'Update Info' : 'Sign Up'}
+                    </Button>
+                    </Link>
             </FormControl>
     )
 }
