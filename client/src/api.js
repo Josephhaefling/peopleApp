@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const usersUrl = 'https://coloradofreeple.herokuapp.com/users';
+const usersUrl = 'http://localhost:5001/users';
+const loginUrl = 'http://localhost:5001/login';
 const eventsUrl = 'https://coloradofreeple.herokuapp.com/events';
 const descriptionUrl = 'https://coloradofreeple.herokuapp.com/descriptions';
 const descriptionId = '606e26dc0e99b7224ccb8fa0'
@@ -22,3 +23,9 @@ export const deleteEvent = (id) => axios.delete(`${eventsUrl}/${id}`)
 export const fetchDescription = () => axios.get(`${descriptionUrl}/${descriptionId}`)
 
 export const editDescription = (descriptionUrl, newDescription) => axios.put(descriptionUrl, newDescription)
+
+export const signIn = (formData) => axios.post(usersUrl, formData)
+
+export const signUp = (formData) => axios.post(`${loginUrl}/signup`, formData)
+
+

@@ -3,10 +3,11 @@ import MainView from './Components/Views/MainView/MainView';
 import AdminView from './Components/Views/AdminView/AdminView';
 import Header from './Components/Header/Header';
 import EventView from './Components/Views/EventView/EventView';
-import LoginView from './Components/Views/LoginView/LoginView';
+// import LoginView from './Components/Views/LoginView/LoginView';
 import EditDescription from './Components/EditDescription/EditDescription';
 import EditEventView from './Components/Views/EditEventView/EditEventView';
 import EditProfileView from './Components/Views/EditProfileView/EditProfileView'
+import Login from './Components/Login/Login';
 import useStyles from './appStyles';
 import { Switch, Route } from 'react-router-dom';
 import { getAllEvents, getAllUsers } from './api';
@@ -23,7 +24,6 @@ function App() {
   const styles = useStyles()
   const { eventView } = styles
 
-  console.log('is logged in:', isLoggedIn)
 
   const getData = async () => {
     const events = await getAllEvents() 
@@ -37,15 +37,21 @@ function App() {
     getData()
   }, [])
 
+  console.log('current user: ', currentUser)
+
   return (
+    
     <Switch>
       <Route
         path='/edit_profile'
         render={()=> {
           return (
             <div>
-              <Header isLoggedIn={ isLoggedIn } setCurrentEvent={ setCurrentEvent } />
-              <EditProfileView user={ currentUser } isRegistered={ isRegistered } setIsRegistered={ setIsRegistered } />
+            <Header 
+              currentUser={ currentUser } 
+              setCurrentUser={ setCurrentUser } 
+              setCurrentEvent={ setCurrentEvent } 
+            />              <EditProfileView user={ currentUser } isRegistered={ isRegistered } setIsRegistered={ setIsRegistered } />
             </div>
           )
         }}
@@ -55,8 +61,11 @@ function App() {
         render={()=> {
           return (
             <div>
-              <Header isLoggedIn={ isLoggedIn } setCurrentEvent={ setCurrentEvent } />
-              <EditEventView 
+            <Header 
+                currentUser={ currentUser } 
+                setCurrentUser={ setCurrentUser } 
+                setCurrentEvent={ setCurrentEvent } 
+              />              <EditEventView 
                 currentEvent={ currentEvent } 
                 currentUser={ currentUser } 
                 setEvents= { setEvents }
@@ -71,7 +80,11 @@ function App() {
         render={()=> {
           return (
             <div>
-              <Header isLoggedIn={ isLoggedIn } setCurrentEvent={ setCurrentEvent } />
+              <Header 
+                currentUser={ currentUser } 
+                setCurrentUser={ setCurrentUser } 
+                setCurrentEvent={ setCurrentEvent } 
+              />
               <EditDescription 
                 events={ events }
                 currentEvent={ currentEvent }
@@ -87,15 +100,19 @@ function App() {
         render={()=> {
           return (
             <div>
-              <Header isLoggedIn={ isLoggedIn } setCurrentEvent={ setCurrentEvent } />
-              <LoginView 
+            <Header
+              currentUser={ currentUser } 
+              setCurrentUser={ setCurrentUser } 
+              setCurrentEvent={ setCurrentEvent } 
+              />              {/* <LoginView 
                 currentUser={ currentUser } 
                 setCurrentUser={ setCurrentUser }
                 isLoggedIn={ isLoggedIn }
                 setIsLoggedIn={ setIsLoggedIn }
                 isRegistered={ isRegistered }
                 setIsRegistered={ setIsRegistered }
-              />
+              /> */}
+              <Login setCurrentUser={ setCurrentUser } users={users} />
             </div>
           )
         }}
@@ -111,8 +128,11 @@ function App() {
         render={()=> {
           return (
             <div className={ eventView }>
-              <Header isLoggedIn={ isLoggedIn } setCurrentEvent={ setCurrentEvent } />
-              <EventView eventInfo={ currentEvent } users={ users } currentEvent={ currentEvent } />
+            <Header 
+              currentUser={ currentUser } 
+              setCurrentUser={ setCurrentUser } 
+              setCurrentEvent={ setCurrentEvent } 
+              />              <EventView eventInfo={ currentEvent } users={ users } currentEvent={ currentEvent } />
             </div>
           ) 
         }}
@@ -128,8 +148,11 @@ function App() {
         render={()=> {
           return (
             <div>
-              <Header isLoggedIn={ isLoggedIn } setCurrentEvent={ setCurrentEvent } />
-              <EditEventView 
+            <Header 
+              currentUser={ currentUser } 
+              setCurrentUser={ setCurrentUser } 
+              setCurrentEvent={ setCurrentEvent } 
+            />              <EditEventView 
               currentUser={ currentUser }
                 currentEvent={ currentEvent } 
                 setCurrentEvent={ setCurrentEvent }
@@ -145,8 +168,11 @@ function App() {
         render={() => {
           return (
             <div className="App">
-              <Header isLoggedIn={ isLoggedIn } setCurrentEvent={ setCurrentEvent } />
-              {
+            <Header 
+              currentUser={ currentUser } 
+              setCurrentUser={ setCurrentUser } 
+              setCurrentEvent={ setCurrentEvent } 
+            />              {
               currentUser.isAdmin ? 
                 <AdminView 
                   users={ users }

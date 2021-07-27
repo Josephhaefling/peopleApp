@@ -10,7 +10,6 @@ const LoginView = (props) => {
     const styles = useStyles()
     const { loginPage } = styles
     
-    console.log('current user in login view: ', currentUser)
     return (
         <div className={loginPage}>
             { isRegistered ? 

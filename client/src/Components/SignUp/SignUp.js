@@ -10,7 +10,7 @@ import FileBase from 'react-file-base64';
 const useStyles = makeStyles({
    signUpBox: {
         alignItems: 'center',
-        borderRadius: 3,
+        borderRadius: '10px',
         boxShadow: '0px 0px 2px 2px rgba(45, 46, 46, .2)',
         display: 'flex',
         flexDirection: 'column',

@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core';
 export default makeStyles(() => ({
     formContainer: {
         alignItems: 'center',
+        borderRadius: '10px',
         boxShadow: '0px 0px 3px 2px rgba(45, 46, 46, .3)',
         display: 'flex',
         justifyContent: 'center',

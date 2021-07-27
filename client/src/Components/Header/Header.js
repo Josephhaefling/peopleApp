@@ -1,18 +1,27 @@
 import React, { useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import { AppBar, Typography, Button } from '@material-ui/core';
+import { useHistory, Link } from 'react-router-dom';
+import { AppBar, Button } from '@material-ui/core';
 import freeple from '../../Assets/ColoradoFreeple.png';
 import useStyles from './styles';
 
 const Header = (props) => {
 
-    const { isLoggedIn, setCurrentEvent } = props
+    const history = useHistory()
+    const { currentUser, setCurrentUser, setCurrentEvent } = props
     const styles = useStyles()
-    const { header, button, navBar, logo } = styles
+    const { button, navBar, logo } = styles
+
+    const logOut = () => {
+        setCurrentUser('')
+        history.push('/')
+        localStorage.clear()
+    }
 
     const getButtonType = () => {
-       if (isLoggedIn) {
+       if (currentUser) {
            return (
+               <div>
+
                <Link
                style={{textDecoration: 'none', color: '#25291C'}}
                to='/edit_profile'
@@ -21,6 +30,10 @@ const Header = (props) => {
                     Profile
                 </Button>   
             </Link>
+            <Button className={button} onClick={ logOut } >
+                log out
+            </Button>   
+            </div>
             )
         } else {
           return (
@@ -47,11 +60,12 @@ const Header = (props) => {
             color='inherit'
         >
             <Link
+                className={logo}
                 onClick={ clearCurrentEvent }
                 style={{textDecoration: 'none', color: '#FEFEFE'}}
                 to='/'
             >
-                <img className={logo} src={freeple} />
+                <h1>Freeple</h1>
             </Link>
             { getButtonType() }
         </AppBar>

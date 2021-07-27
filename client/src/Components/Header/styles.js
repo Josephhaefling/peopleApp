@@ -10,11 +10,6 @@ export default makeStyles(() => ({
         justifyContent: 'space-between',
         // textAlign: 'center'
     },
-    logo: {
-        height: '14.5vh',
-        justifyContent: 'center',
-        width: '14vw'
-    }, 
     header: {
         color: '#FEFEFE',
         fontSize: 60,
@@ -26,5 +21,9 @@ export default makeStyles(() => ({
         width: '10vw',
         fontFamily: 'Libre Franklin',
         textTransform: 'capitalize'
+    },
+    logo: {
+        fontFamily: 'Libre Franklin',
+        paddingLeft: '50px',
     }
 }))

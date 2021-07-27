@@ -6,7 +6,7 @@ export default makeStyles(() => ({
         fontFamily: 'Open Sans'
     },
     header: {
-        color: '#3F84E5',
+        color: '#79bec3',
         fontFamily: 'Libre Franklin'
     }
 }))

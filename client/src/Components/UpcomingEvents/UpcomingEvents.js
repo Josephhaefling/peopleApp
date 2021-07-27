@@ -7,6 +7,16 @@ import { getEvents, createEvents } from './useUpComingEvents';
 const useStyles = makeStyles({
     title: {
         fontFamily: 'Libre Franklin',
+    },
+    eventsContainer: {
+        marginTop: '20px',
+        minHeight: '50vh'
+    }, 
+    eventContainer: {
+        marginTop: '50px',
+    },
+    buttonContainer: {
+        marginTop: '20px',
     }
 });
 
@@ -29,16 +39,18 @@ const UpcomingEvents = (props) => {
             <Typography classes={{ root: classes.title }}>Upcoming Events</Typography>
             {
                 currentUser.isAdmin && 
-                <Link 
-                    to='/create_event' 
-                    style={{textDecoration: 'none'}}
-                >
-                    <Button>
-                        Create Event
-                    </Button>
-                </Link>
+                <div className={classes.buttonContainer}>
+                    <Link 
+                        to='/create_event' 
+                        style={{textDecoration: 'none'}}
+                    >
+                        <Button>
+                            Create Event
+                        </Button>
+                    </Link>
+                </div>
             }
-            <div>
+            <div  className={classes.eventContainer}>
                 {eventsList}
             </div>
         </div>

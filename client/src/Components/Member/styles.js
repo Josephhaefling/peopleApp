@@ -7,7 +7,8 @@ export default makeStyles(() => ({
         display: 'flex',
         flexDirection: 'column',
         fontFamily: 'Open Sans',
-        marginTop: '2vh',
+        margin: '2vh',
+        width: '75px',
         
     }, 
     imageContainer: {

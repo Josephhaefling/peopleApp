@@ -3,9 +3,10 @@ import { makeStyles } from '@material-ui/core';
 export default makeStyles(() => ({
     eventContainer: {
         fontFamily: 'Open Sans',
-        borderRadius: 3,
+        borderRadius: '10px',
         boxShadow: '0px 0px 3px 2px rgba(45, 46, 46, .3)',
         height: '30vh',
+        padding: '10px',
         width: '44vw',
         '&:hover': {
             animationName: `$pop`,
@@ -16,7 +17,8 @@ export default makeStyles(() => ({
     },
     header: {
         color: '#79bec3',
-        fontFamily: 'Libre Franklin'
+        fontFamily: 'Libre Franklin',
+        margin: '0px',
     },
     button: {
         fontFamily: 'Open Sans',
@@ -24,6 +26,7 @@ export default makeStyles(() => ({
         height: '30px'
     },
     attendeesContainer: {
+        alignItems: 'center',
         display: 'flex',
         justifyContent: 'space-between',
         height: 'auto'
