@@ -1,14 +1,14 @@
 import mongoose from 'mongoose';
 
 const userSchema = mongoose.Schema({
-        userName: String,
-        firstName: String,
-        lastName: String,
-        email: String,
-        isAdmin: Boolean,
+        userName: { type: String, required: true },
+        firstName: { type: String, required: true },
+        lastName: { type: String, required: false },
+        email: { type: String, required: false },
+        isAdmin: { type: Boolean, required: true },
         events: [Object],
-        password: String,
-        image: String
+        password: { type: String, required: true },
+        image: { type: String, required: false }
 })
 
 const userMessage = mongoose.model('userSchema', userSchema)

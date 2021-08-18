@@ -2,6 +2,9 @@ import express from 'express';
 
 import {createDescription, getDescription, updateDescription, deleteDescription, getDescriptions} from '../Controllers/Description.js';
 
+import auth from'../middleware/auth.js';
+
+
 const router = express.Router()
 
 router.get('/', getDescriptions)

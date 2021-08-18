@@ -65,7 +65,7 @@ const Header = (props) => {
                 style={{textDecoration: 'none', color: '#FEFEFE'}}
                 to='/'
             >
-                <h1>Freeple</h1>
+                <h1>Peeple</h1>
             </Link>
             { getButtonType() }
         </AppBar>

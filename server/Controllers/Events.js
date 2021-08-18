@@ -14,9 +14,15 @@ export const getEvents = async (req, res) => {
 export const createEvent = async (req, res) => {
     const { title, description, attending, date, time } = req.body;
     const newEventMessage = new eventMessage({ title, description, attending, date, time })
+
+    if(!req.userName) return res.json({ message: 'Unauthenticated'})
     try {
-        await newEventMessage.save();
-        res.status(201).json(newEventMessage );
+        if(req.userName) {
+            await newEventMessage.save();
+            res.status(201).json(newEventMessage );
+        } else {
+            res.status(409),json(`Something went wrong.`)
+        }
     } catch (error) {
         res.status(409).json({ message: error.message });
     }

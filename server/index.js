@@ -11,6 +11,7 @@ import LocalStrategy from 'passport-local';
 
 import userRoutes from './Routes/Users.js';
 import eventRoutes from './Routes/Events.js';
+import loginRoutes from './Routes/Login.js';
 import descriptionRoutes from './Routes/Description.js';
 
 const app = express()
@@ -29,6 +30,7 @@ app.use(passport.session())
 app.use('/descriptions', descriptionRoutes)
 app.use('/users', userRoutes)
 app.use('/events', eventRoutes)
+app.use('/login', loginRoutes)
 
     
 

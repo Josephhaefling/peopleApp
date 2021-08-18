@@ -12,25 +12,25 @@ export default makeStyles(() => ({
         color: '#79bec3',
         fontFamily: 'Libre Franklin'
     }, 
-
+    
     imageContainer: {
         display: 'flex',
         flexWrap: 'wrap',
         height: 'auto',
-        justifyContent: 'space-around', 
+        justifyContent: 'space-between', 
         marginTop: '1vh',
-        maxHeight: '250px',
         maxWidth: '50vw',
-        overflow: 'hidden',
     },
-  
+    
     fullImageContainer: {
         display: 'flex',
         flexWrap: 'wrap',
         height: 'auto',
+        maxHeight: '150px',
         minHeight: 'auto',
         fontFamily: 'Open Sans',
-        justifyContent: 'space-around', 
+        justifyContent: 'space-between', 
+        overflow: 'hidden',
     },
     button: {
         fontFamily: 'Open Sans'
