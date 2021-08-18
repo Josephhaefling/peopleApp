@@ -34,5 +34,6 @@ export default makeStyles(() => ({
     },
     button: {
         fontFamily: 'Open Sans'
+        
     }
 }))
