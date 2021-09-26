@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React from 'react';
 import Description from '../../Description/Description';
 import UpComingEvents from '../../UpcomingEvents/UpcomingEvents';
 import Members from '../../Members/Members';
 import Photos from '../../Photos/Photos';
 import Discussion from '../../Discussion/Discussion';
 // import { getAllUsers } from '../../../api';
+// import { getAllEvents } from '../../../api';
 import useStyles from './styles';
-import { getAllEvents } from '../../../api';
 
 const AdminView = (props) => {
 
