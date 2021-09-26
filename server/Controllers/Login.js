@@ -6,10 +6,9 @@ import userMessage from '../Models/UserMessage.js';
 
 export const signin = async (req, res) => {
     const { email, password } = req.body
+    console.log('I am in the sign in')
 
     try { 
-       
-        console.log('I am in the sign in')
         const existingUser = await userMessage.findOne({ email })
         if(!existingUser) return res.status(404).json({ message: `User doesn't exist`})
         isPasswordCorrect = await bcrypt.compare(password, existingUser.password)

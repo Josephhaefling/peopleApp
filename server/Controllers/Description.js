@@ -32,7 +32,6 @@ export const createDescription = async (req, res) => {
 }
 
 export const updateDescription = async (req, res) => {
-    console.log('request body', req.body)
     const { id } = req.params;
     const { content } = req.body;
     const description = await DescriptionMessage.findById(id);

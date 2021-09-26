@@ -1,6 +1,12 @@
 import express from 'express';
 
-import {createDescription, getDescription, updateDescription, deleteDescription, getDescriptions} from '../Controllers/Description.js';
+import {
+    createDescription, 
+    getDescription, 
+    updateDescription, 
+    deleteDescription, 
+    getDescriptions
+} from '../Controllers/Description.js';
 
 import auth from'../middleware/auth.js';
 

@@ -8,7 +8,6 @@ import passport from 'passport';
 // import ObjectId from 'mongodb';
 import LocalStrategy from 'passport-local';
 
-
 import userRoutes from './Routes/Users.js';
 import eventRoutes from './Routes/Events.js';
 import loginRoutes from './Routes/Login.js';
@@ -31,10 +30,6 @@ app.use('/descriptions', descriptionRoutes)
 app.use('/users', userRoutes)
 app.use('/events', eventRoutes)
 app.use('/login', loginRoutes)
-
-    
-
-
 
 const PORT = process.env.PORT || 5001
 console.log('port: ', process.env.PORT)
@@ -85,7 +80,7 @@ passport.use(findUserDocument)
     // let db = 
     // app.get('/', (req, res) => {
     //     console.log('hi')
-    //     res.send('Hello there Freeple admin')
+    //     res.send('Hello there Peeple admin')
     // })
 
     console.log(`Server running on port ${PORT}`)}
