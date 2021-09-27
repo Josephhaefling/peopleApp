@@ -2,6 +2,19 @@
 
 ### A meetup clone to get some practice with Node and Express.
 
+### Setup Instructions
+Local Server Instructions:
+
+Clone this repo
+- Navigate into the client using `cd client`
+- In the directory, run npm install
+- Open a new tab in the terminal and navigate into the server using `cd server`
+- In the directory, run npm install
+- Once npm is installed, run npm start in your terminal for both the server and the client
+- Keep the terminal running in the background and go to http://localhost:3000/ in your browser
+- When you are done, enter control + c in the terminal to stop the server
+
+
 ### Contributors:
 Joe Haefling (GitHub: Josephhaefling)
 
